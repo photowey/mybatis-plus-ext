@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+
+# 加载 MetaPropertiesFiller 实现类
+# 如果开发者没有添加, 则框架默认添加 {@code com.photowey.mybatisplus.ext.meta.filler.DefaultMetaPropertiesFiller}
+com.photowey.mybatisplus.ext.meta.filler.MetaPropertiesFiller=\
+
