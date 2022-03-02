@@ -1,5 +1,6 @@
 #  `Mybatis-Plus` 扩展项目 `Mybatis-Plus-Ext`
 > `Mybatis-Plus` 扩展, 目标是实现更大程度的简化开发
+> > 文档暂未补全,详见示例工程 [mybatis-plus-ext-examples](https://github.com/photowey/mybatis-plus-ext-examples) 
 
 > 扩展项:
 
