@@ -11,3 +11,5 @@
 ## 3.[`BaseMapper` 扩展 ](./doc/base-mapper.md)
 
 ## 4.[条件注解 ](./doc/condition-annotation.md)
+
+- 新增 `@Select` 注解
