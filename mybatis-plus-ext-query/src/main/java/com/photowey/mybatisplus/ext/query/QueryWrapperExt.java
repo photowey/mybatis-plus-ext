@@ -24,6 +24,7 @@ import com.photowey.mybatisplus.ext.validator.ValueValidator;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * {@code QueryWrapperExt}
@@ -48,6 +49,11 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.eq(ValueValidator.isNotNullOrEmpty(value), column, value);
     }
 
+    public <V> QueryWrapperExt<T> eq(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.eq(column, value);
+    }
+
+
     /**
      * != || <>
      *
@@ -58,6 +64,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      */
     public <V> QueryWrapperExt<T> neIfPresent(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.ne(ValueValidator.isNotNullOrEmpty(value), column, value);
+    }
+
+    public <V> QueryWrapperExt<T> ne(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.ne(column, value);
     }
 
     /**
@@ -72,6 +82,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.gt(ValueValidator.isNotNullOrEmpty(value), column, value);
     }
 
+    public <V> QueryWrapperExt<T> gt(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.gt(column, value);
+    }
+
     /**
      * >=
      *
@@ -82,6 +96,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      */
     public <V> QueryWrapperExt<T> geIfPresent(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.ge(ValueValidator.isNotNullOrEmpty(value), column, value);
+    }
+
+    public <V> QueryWrapperExt<T> ge(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.ge(column, value);
     }
 
     /**
@@ -96,6 +114,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.lt(ValueValidator.isNotNullOrEmpty(value), column, value);
     }
 
+    public <V> QueryWrapperExt<T> lt(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.lt(column, value);
+    }
+
     /**
      * <=
      *
@@ -106,6 +128,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      */
     public <V> QueryWrapperExt<T> leIfPresent(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.le(ValueValidator.isNotNullOrEmpty(value), column, value);
+    }
+
+    public <V> QueryWrapperExt<T> le(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.le(column, value);
     }
 
     /**
@@ -120,6 +146,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.like(ValueValidator.isNotNullOrEmpty(value), column, value);
     }
 
+    public <V> QueryWrapperExt<T> like(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.like(column, value);
+    }
+
     /**
      * LEFT LIKE
      *
@@ -129,7 +159,11 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      * @return {@link QueryWrapperExt<T>}
      */
     public <V> QueryWrapperExt<T> likeLeftIfPresent(String column, @Nullable V value) {
-        return likeIfPresent(column, value, SqlLike.LEFT);
+        return this.likeIfPresent(column, value, SqlLike.LEFT);
+    }
+
+    public <V> QueryWrapperExt<T> likeLeft(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.likeLeft(column, value);
     }
 
     /**
@@ -141,7 +175,11 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      * @return {@link QueryWrapperExt<T>}
      */
     public <V> QueryWrapperExt<T> likeRightIfPresent(String column, @Nullable V value) {
-        return likeIfPresent(column, value, SqlLike.RIGHT);
+        return this.likeIfPresent(column, value, SqlLike.RIGHT);
+    }
+
+    public <V> QueryWrapperExt<T> likeRight(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.likeRight(ValueValidator.isNotNullOrEmpty(value), column, value);
     }
 
     /**
@@ -167,6 +205,20 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         }
     }
 
+    public <V> QueryWrapperExt<T> like(String column, @Nullable V value, SqlLike sqlLike) {
+        if (Objects.isNull(sqlLike)) {
+            return this.like(column, value);
+        }
+        switch (sqlLike) {
+            case LEFT:
+                return (QueryWrapperExt<T>) super.likeLeft(column, value);
+            case RIGHT:
+                return (QueryWrapperExt<T>) super.likeRight(column, value);
+            default:
+                return this.like(column, value);
+        }
+    }
+
     /**
      * NOT LIKE
      *
@@ -179,6 +231,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.notLike(ValueValidator.isNotNullOrEmpty(value), column, value);
     }
 
+    public <V> QueryWrapperExt<T> notLike(String column, @Nullable V value) {
+        return (QueryWrapperExt<T>) super.notLike(column, value);
+    }
+
     /**
      * IN {@link  Collection}
      *
@@ -189,6 +245,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
      */
     public <V> QueryWrapperExt<T> inIfPresent(String column, @Nullable @Emptable Collection<V> values) {
         return (QueryWrapperExt<T>) super.in(ValueValidator.isNotNullOrEmpty(values), column, values);
+    }
+
+    public <V> QueryWrapperExt<T> in(String column, @Nullable @Emptable Collection<V> values) {
+        return (QueryWrapperExt<T>) super.in(column, values);
     }
 
     /**
@@ -208,6 +268,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return this;
     }
 
+    public <V> QueryWrapperExt<T> in(String column, @Nullable @Emptable V... values) {
+        return (QueryWrapperExt<T>) super.in(column, values);
+    }
+
     /**
      * NOT IN {@link  Collection}
      *
@@ -219,6 +283,11 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
     public <V> QueryWrapperExt<T> notInIfPresent(String column, @Nullable @Emptable Collection<V> values) {
         return (QueryWrapperExt<T>) super.notIn(ValueValidator.isNotNullOrEmpty(values), column, values);
     }
+
+    public <V> QueryWrapperExt<T> notIn(String column, @Nullable @Emptable Collection<V> values) {
+        return (QueryWrapperExt<T>) super.notIn(column, values);
+    }
+
 
     /**
      * NOT IN
@@ -235,6 +304,10 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         }
 
         return this;
+    }
+
+    public <V> QueryWrapperExt<T> notIn(String column, @Nullable @Emptable V... values) {
+        return (QueryWrapperExt<T>) super.notIn(column, values);
     }
 
     /**
@@ -260,4 +333,30 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return this;
     }
 
+    public <V> QueryWrapperExt<T> between(String column, @Nullable V from, @Nullable V to) {
+        return (QueryWrapperExt<T>) super.between(column, from, to);
+    }
+
+    /**
+     * 用于获取 {@link QueryWrapper} 自身对象,从而实现一些模板代码,进而提升 {@link QueryWrapper} 的灵活性
+     * <p>
+     * For example:
+     * <pre>
+     * new QueryWrapperExt<Hello>().thiz((qw)->{}).eq("id", 1L);
+     * </pre>
+     *
+     * @param fx {@link Consumer<QueryWrapperExt<T>>}
+     * @return {@link QueryWrapperExt<T>}
+     */
+    public QueryWrapperExt<T> thiz(Consumer<QueryWrapperExt<T>> fx) {
+        return this.thiz(true, fx);
+    }
+
+    public QueryWrapperExt<T> thiz(boolean condition, Consumer<QueryWrapperExt<T>> fx) {
+        if (condition) {
+            fx.accept(this);
+        }
+
+        return this;
+    }
 }

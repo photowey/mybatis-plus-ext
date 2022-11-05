@@ -15,7 +15,6 @@
  */
 package com.photowey.mybatisplus.ext.config;
 
-import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -50,9 +49,13 @@ public class MybatisPlusPaginationAutoConfigure {
         return interceptor;
     }
 
+    // since update mybatis-plus @v3.5.2
+
+    /*
     @Bean
     @ConditionalOnMissingBean(ConfigurationCustomizer.class)
     public ConfigurationCustomizer configurationCustomizer(MybatisPlusExtProperties props) {
         return configuration -> configuration.setUseDeprecatedExecutor(props.isUseDeprecatedExecutor());
     }
+    */
 }

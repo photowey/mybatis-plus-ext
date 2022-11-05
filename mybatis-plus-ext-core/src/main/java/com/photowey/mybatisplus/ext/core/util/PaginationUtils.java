@@ -23,7 +23,7 @@ import com.photowey.mybatisplus.ext.core.sort.SortColumn;
 import com.photowey.mybatisplus.ext.enmus.OrderByEnum;
 import com.photowey.mybatisplus.ext.validator.ValueValidator;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -49,14 +49,18 @@ public final class PaginationUtils {
 
     public static <T, Q extends IPagination> IPage<T> populatePage(Q query, Consumer<IPage<T>> callback) {
         Page<T> page = new Page<>(query.getPageNo(), query.getPageSize());
-        if (null != callback) {
-            callback.accept(page);
+
+        Collection<SortColumn> columns = query.getSortColumns();
+        if (ValueValidator.isNotNullOrEmpty(columns)) {
+            page.addOrder(columns.stream()
+                    .map(column -> OrderByEnum.ASC.equals(column.getOrderBy())
+                            ? OrderItem.asc(column.getColumn())
+                            : OrderItem.desc(column.getColumn()
+                    )).collect(Collectors.toList()));
         }
 
-        List<SortColumn> columns = query.sortColumns();
-        if (ValueValidator.isNotNullOrEmpty(columns)) {
-            page.addOrder(columns.stream().map(column ->
-                    OrderByEnum.ASC.equals(column.getOrderBy()) ? OrderItem.asc(column.getColumn()) : OrderItem.desc(column.getColumn())).collect(Collectors.toList()));
+        if (null != callback) {
+            callback.accept(page);
         }
 
         return page;

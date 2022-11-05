@@ -173,10 +173,10 @@ public interface RepositoryExt<T> extends BaseMapper<T> {
      * @param <V>    参数类型
      * @return {@link T} 类型
      */
-    default <V> int selectCount(String column, @NotNull V value) {
+    default <V> long selectCount(String column, @NotNull V value) {
         this.checkNull(value);
 
-        return Optional.ofNullable(selectCount(this.createQueryWrapper().eq(column, value))).orElse(0);
+        return Optional.ofNullable(this.selectCount(this.createQueryWrapper().eq(column, value))).orElse(0L);
     }
 
     /**
@@ -189,13 +189,13 @@ public interface RepositoryExt<T> extends BaseMapper<T> {
      * @param <V>      参数类型
      * @return {@link T} 类型
      */
-    default <V> int selectCount(String column, @NotNull V value, Consumer<QueryWrapper<T>> callback) {
+    default <V> long selectCount(String column, @NotNull V value, Consumer<QueryWrapper<T>> callback) {
         this.checkNull(value);
 
         QueryWrapper<T> queryWrapper = this.createQueryWrapper().eq(column, value);
         callback.accept(queryWrapper);
 
-        return Optional.ofNullable(selectCount(queryWrapper)).orElse(0);
+        return Optional.ofNullable(this.selectCount(queryWrapper)).orElse(0L);
     }
 
     /**
@@ -207,10 +207,10 @@ public interface RepositoryExt<T> extends BaseMapper<T> {
      * @param <V>      参数类型
      * @return {@link T} 类型
      */
-    default <V> int selectCount(SFunction<T, ?> function, @NotNull V value) {
+    default <V> long selectCount(SFunction<T, ?> function, @NotNull V value) {
         this.checkNull(value);
 
-        return Optional.ofNullable(selectCount(this.createLambdaQueryWrapper().eq(function, value))).orElse(0);
+        return Optional.ofNullable(this.selectCount(this.createLambdaQueryWrapper().eq(function, value))).orElse(0L);
     }
 
     /**
@@ -223,13 +223,13 @@ public interface RepositoryExt<T> extends BaseMapper<T> {
      * @param <V>      参数类型
      * @return {@link T} 类型
      */
-    default <V> int selectCount(SFunction<T, ?> function, @NotNull V value, Consumer<LambdaQueryWrapper<T>> callback) {
+    default <V> long selectCount(SFunction<T, ?> function, @NotNull V value, Consumer<LambdaQueryWrapper<T>> callback) {
         this.checkNull(value);
 
         LambdaQueryWrapper<T> queryWrapper = this.createLambdaQueryWrapper().eq(function, value);
         callback.accept(queryWrapper);
 
-        return Optional.ofNullable(selectCount(queryWrapper)).orElse(0);
+        return Optional.ofNullable(this.selectCount(queryWrapper)).orElse(0L);
     }
 
     /**

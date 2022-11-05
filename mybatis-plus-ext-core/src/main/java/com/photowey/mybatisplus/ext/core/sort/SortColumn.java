@@ -16,8 +16,10 @@
 package com.photowey.mybatisplus.ext.core.sort;
 
 import com.photowey.mybatisplus.ext.enmus.OrderByEnum;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * {@code SortColumn}
@@ -29,9 +31,11 @@ import java.io.Serializable;
  */
 public class SortColumn implements Serializable {
 
-    private static final long serialVersionUID = -3509662954357616201L;
+    private static final long serialVersionUID = -7493258064912684126L;
 
+    @ApiModelProperty(value = "列名", required = false, example = "id")
     private String column;
+    @ApiModelProperty(value = "排序", required = false, example = "DESC")
     private OrderByEnum orderBy;
 
     public SortColumn() {
@@ -56,5 +60,22 @@ public class SortColumn implements Serializable {
 
     public void setOrderBy(OrderByEnum orderBy) {
         this.orderBy = orderBy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof SortColumn)) {
+            return false;
+        }
+        SortColumn that = (SortColumn) o;
+        return Objects.equals(column, that.column) && orderBy == that.orderBy;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(column, orderBy);
     }
 }

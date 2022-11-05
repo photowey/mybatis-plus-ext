@@ -22,6 +22,7 @@
         <module>mybatis-plus-ext-starter</module>
         <module>mybatis-plus-ext-meta</module>
         <module>mybatis-plus-ext-processor</module>
+        <module>mybatis-plus-ext-selector</module>
     </modules>
 
     <scm>
@@ -45,8 +46,12 @@
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-license-plugin.version>3.0</maven-license-plugin.version>
 
-        <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
+
+        <swagger.version>1.5.22</swagger.version>
+        <lombok.version>1.18.24</lombok.version>
+        <jackson-databind.version>2.13.3</jackson-databind.version>
 
         <!-- 当出现版本冲突的时候, 可以尝试自定义版本号 -->
         <spring-boot.version>2.6.2</spring-boot.version>
@@ -119,11 +124,35 @@
                 <artifactId>mybatis-plus-ext-validator</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.photowey</groupId>
+                <artifactId>mybatis-plus-ext-selector</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
                 <version>${validation-api.version}</version>
+            </dependency>
+
+            <!-- swagger -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
             </dependency>
 
             <dependency>

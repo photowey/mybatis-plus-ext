@@ -17,8 +17,8 @@ package com.photowey.mybatisplus.ext.core.pagination;
 
 import com.photowey.mybatisplus.ext.core.sort.SortColumn;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * {@code IPagination}
@@ -55,7 +55,7 @@ public interface IPagination {
      *
      * @return {@link  SortColumn} 排序列表
      */
-    default List<SortColumn> sortColumns() {
-        return new ArrayList<>();
+    default Set<SortColumn> getSortColumns() {
+        return new HashSet<>();
     }
 }
