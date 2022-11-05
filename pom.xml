@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <name>mybatis-plus-ext</name>
     <description>Mybatis-plus-ext project for</description>
+    <inceptionYear>2022</inceptionYear>
 
     <modules>
         <module>mybatis-plus-ext-core</module>
@@ -25,12 +26,26 @@
         <module>mybatis-plus-ext-processor</module>
     </modules>
 
+    <scm>
+        <connection>
+            scm:git:git@github.com:photowey/mybatis-plus-ext.git
+        </connection>
+        <developerConnection>
+            scm:git:git@github.com:photowey/mybatis-plus-ext.git
+        </developerConnection>
+        <url>https://github.com/photowey/mybatis-plus-ext
+        </url>
+        <tag>HEAD</tag>
+    </scm>
+
     <properties>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-license-plugin.version>3.0</maven-license-plugin.version>
 
         <mybatis-plus.version>3.4.2</mybatis-plus.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
@@ -159,6 +174,58 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven-release-plugin.version}</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <generateReleasePoms>false</generateReleasePoms>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <arguments>-DskipTests</arguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${maven-license-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>remove</goal>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <quiet>true</quiet>
+                    <header>
+                        com/mycila/maven/plugin/license/templates/APACHE-2.txt
+                    </header>
+                    <properties>
+                        <!-- <owner>photowey</owner>-->
+                        <owner>the original author or authors</owner>
+                        <email>photowey@gmail.com</email>
+                    </properties>
+                    <excludes>
+                        <exclude>.gitignore</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>**/.mvn/**</exclude>
+                        <exclude>**/*.properties</exclude>
+                        <exclude>**/*.yml</exclude>
+                        <exclude>**/*.xml</exclude>
+                        <exclude>**/*.txt</exclude>
+                        <exclude>**/*.cmd</exclude>
+                        <exclude>**/*.sh</exclude>
+                    </excludes>
+                    <strictCheck>true</strictCheck>
+                    <mapping>
+                        <java>SLASHSTAR_STYLE</java>
+                    </mapping>
+                </configuration>
             </plugin>
         </plugins>
     </build>
