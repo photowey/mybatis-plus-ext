@@ -51,11 +51,11 @@
 
         <swagger.version>1.5.22</swagger.version>
         <lombok.version>1.18.24</lombok.version>
-        <jackson-databind.version>2.13.3</jackson-databind.version>
+        <jackson-databind.version>2.13.4</jackson-databind.version>
 
         <!-- 当出现版本冲突的时候, 可以尝试自定义版本号 -->
         <spring-boot.version>2.6.2</spring-boot.version>
-        <spring.version>5.3.14</spring.version>
+        <spring.version>5.3.20</spring.version>
     </properties>
 
     <dependencies>
