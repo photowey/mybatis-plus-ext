@@ -16,13 +16,13 @@
 package com.photowey.mybatisplus.ext.processor.expression;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.photowey.mybatisplus.ext.annotation.ConditionProcessor;
 import com.photowey.mybatisplus.ext.annotation.OrderBy;
 import com.photowey.mybatisplus.ext.annotation.component.ExpressionProcessor;
 import com.photowey.mybatisplus.ext.enmus.OrderByEnum;
 import com.photowey.mybatisplus.ext.enmus.OrderByMechanismEnum;
 import com.photowey.mybatisplus.ext.processor.model.query.AbstractQuery;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 
@@ -53,7 +53,7 @@ public class OrderByProcessor<QUERY extends AbstractQuery, ENTITY>
             value = "1";
         }
         String columnName = criteriaAnnotation.alias();
-        if (StringUtils.isEmpty(columnName)) {
+        if (ObjectUtils.isEmpty(columnName)) {
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;

@@ -16,13 +16,13 @@
 package com.photowey.mybatisplus.ext.processor.expression;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.photowey.mybatisplus.ext.annotation.ConditionProcessor;
 import com.photowey.mybatisplus.ext.annotation.Timestamp;
 import com.photowey.mybatisplus.ext.annotation.component.ExpressionProcessor;
 import com.photowey.mybatisplus.ext.enmus.CompareEnum;
 import com.photowey.mybatisplus.ext.processor.model.query.AbstractQuery;
 import com.photowey.mybatisplus.ext.processor.util.TimeUtils;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 
@@ -50,7 +50,7 @@ public class TimestampProcessor<QUERY extends AbstractQuery, ENTITY>
             return true;
         }
         String columnName = criteriaAnnotation.alias();
-        if (StringUtils.isEmpty(columnName)) {
+        if (ObjectUtils.isEmpty(columnName)) {
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
