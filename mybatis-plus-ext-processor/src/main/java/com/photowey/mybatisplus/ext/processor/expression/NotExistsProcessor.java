@@ -53,7 +53,7 @@ public class NotExistsProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.notExists(null != value, criteriaAnnotation.existsSql());
+        queryWrapper.notExists(ObjectUtils.isNotEmpty(value), criteriaAnnotation.existsSql());
 
         return true;
     }

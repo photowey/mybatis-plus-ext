@@ -53,7 +53,7 @@ public class GtProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.gt(null != value, columnName, value);
+        queryWrapper.gt(ObjectUtils.isNotEmpty(value), columnName, value);
 
         return true;
     }

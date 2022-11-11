@@ -53,7 +53,7 @@ public class LeProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.le(null != value, columnName, value);
+        queryWrapper.le(ObjectUtils.isNotEmpty(value), columnName, value);
 
         return true;
     }

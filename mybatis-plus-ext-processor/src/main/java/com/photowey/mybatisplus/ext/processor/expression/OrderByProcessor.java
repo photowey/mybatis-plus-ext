@@ -60,10 +60,10 @@ public class OrderByProcessor<QUERY extends AbstractQuery, ENTITY>
         OrderByEnum orderBy = criteriaAnnotation.orderBy();
         switch (orderBy) {
             case DESC:
-                queryWrapper.orderByDesc(null != value, columnName);
+                queryWrapper.orderByDesc(ObjectUtils.isNotEmpty(value), columnName);
                 break;
             default:
-                queryWrapper.orderByAsc(null != value, columnName);
+                queryWrapper.orderByAsc(ObjectUtils.isNotEmpty(value), columnName);
                 break;
         }
 

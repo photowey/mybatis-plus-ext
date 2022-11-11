@@ -53,7 +53,7 @@ public class LtProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.lt(null != value, columnName, value);
+        queryWrapper.lt(ObjectUtils.isNotEmpty(value), columnName, value);
 
         return true;
     }

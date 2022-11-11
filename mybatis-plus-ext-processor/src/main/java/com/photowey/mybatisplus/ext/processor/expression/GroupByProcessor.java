@@ -53,7 +53,7 @@ public class GroupByProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.groupBy(null != value, columnName);
+        queryWrapper.groupBy(ObjectUtils.isNotEmpty(value), columnName);
 
         return true;
     }

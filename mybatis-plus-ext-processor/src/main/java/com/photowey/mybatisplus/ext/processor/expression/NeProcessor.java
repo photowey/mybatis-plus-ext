@@ -53,7 +53,7 @@ public class NeProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.ne(null != value, columnName, value);
+        queryWrapper.ne(ObjectUtils.isNotEmpty(value), columnName, value);
 
         return true;
     }

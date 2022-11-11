@@ -53,7 +53,7 @@ public class HavingProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.having(null != value, columnName);
+        queryWrapper.having(ObjectUtils.isNotEmpty(value), columnName);
 
         return true;
     }

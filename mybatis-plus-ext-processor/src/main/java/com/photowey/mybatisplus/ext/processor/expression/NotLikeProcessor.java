@@ -53,7 +53,7 @@ public class NotLikeProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.notLike(null != value, columnName, value);
+        queryWrapper.notLike(ObjectUtils.isNotEmpty(value), columnName, value);
 
         return true;
     }

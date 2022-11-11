@@ -54,22 +54,22 @@ public class ObjectTimeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         CompareEnum compare = criteriaAnnotation.compare();
         switch (compare) {
             case EQ:
-                queryWrapper.eq(null != value, columnName, value);
+                queryWrapper.eq(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
             case NE:
-                queryWrapper.ne(null != value, columnName, value);
+                queryWrapper.ne(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
             case GE:
-                queryWrapper.ge(null != value, columnName, value);
+                queryWrapper.ge(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
             case GT:
-                queryWrapper.gt(null != value, columnName, value);
+                queryWrapper.gt(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
             case LE:
-                queryWrapper.le(null != value, columnName, value);
+                queryWrapper.le(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
             default:
-                queryWrapper.lt(null != value, columnName, value);
+                queryWrapper.lt(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
         }
 

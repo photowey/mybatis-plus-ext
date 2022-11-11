@@ -53,7 +53,7 @@ public class GeProcessor<QUERY extends AbstractQuery, ENTITY>
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.ge(null != value, columnName, value);
+        queryWrapper.ge(ObjectUtils.isNotEmpty(value), columnName, value);
 
         return true;
     }

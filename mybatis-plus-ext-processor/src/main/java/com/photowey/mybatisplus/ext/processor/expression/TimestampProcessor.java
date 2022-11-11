@@ -61,24 +61,24 @@ public class TimestampProcessor<QUERY extends AbstractQuery, ENTITY>
         Class<?> clazz = criteriaAnnotation.clazz();
         switch (compare) {
             case EQ:
-                // queryWrapper.eq(null != value, columnName, TimeUtils.toTime(timeStamp, clazz));
+                // queryWrapper.eq(ObjectUtils.isNotEmpty(value), columnName, TimeUtils.toTime(timeStamp, clazz));
                 // @since 1.1.0
-                queryWrapper.eq(null != value, columnName, TimeUtils.toTime(timeStamp, clazz));
+                queryWrapper.eq(ObjectUtils.isNotEmpty(value), columnName, TimeUtils.toTime(timeStamp, clazz));
                 break;
             case NE:
-                queryWrapper.ne(null != value, columnName, TimeUtils.toTime(timeStamp, clazz));
+                queryWrapper.ne(ObjectUtils.isNotEmpty(value), columnName, TimeUtils.toTime(timeStamp, clazz));
                 break;
             case GE:
-                queryWrapper.ge(null != value, columnName, TimeUtils.toTime(timeStamp, clazz));
+                queryWrapper.ge(ObjectUtils.isNotEmpty(value), columnName, TimeUtils.toTime(timeStamp, clazz));
                 break;
             case GT:
-                queryWrapper.gt(null != value, columnName, TimeUtils.toTime(timeStamp, clazz));
+                queryWrapper.gt(ObjectUtils.isNotEmpty(value), columnName, TimeUtils.toTime(timeStamp, clazz));
                 break;
             case LE:
-                queryWrapper.le(null != value, columnName, TimeUtils.toTime(timeStamp, clazz));
+                queryWrapper.le(ObjectUtils.isNotEmpty(value), columnName, TimeUtils.toTime(timeStamp, clazz));
                 break;
             default:
-                queryWrapper.lt(null != value, columnName, TimeUtils.toTime(timeStamp, clazz));
+                queryWrapper.lt(ObjectUtils.isNotEmpty(value), columnName, TimeUtils.toTime(timeStamp, clazz));
                 break;
         }
 
