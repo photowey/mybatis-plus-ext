@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = Le.class)
 @ConditionProcessor(targetAnnotation = Le.class)
-public class LeProcessor<QUERY extends AbstractQuery, ENTITY>
+public class LeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<Le, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override

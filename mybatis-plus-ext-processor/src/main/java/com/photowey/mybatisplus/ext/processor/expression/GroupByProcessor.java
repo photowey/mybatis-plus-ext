@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = GroupBy.class)
 @ConditionProcessor(targetAnnotation = GroupBy.class)
-public class GroupByProcessor<QUERY extends AbstractQuery, ENTITY>
+public class GroupByProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<GroupBy, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override

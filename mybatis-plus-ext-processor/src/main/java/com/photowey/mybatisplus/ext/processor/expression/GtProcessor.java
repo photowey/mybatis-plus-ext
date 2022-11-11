@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = Gt.class)
 @ConditionProcessor(targetAnnotation = Gt.class)
-public class GtProcessor<QUERY extends AbstractQuery, ENTITY>
+public class GtProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<Gt, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override

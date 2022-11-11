@@ -38,7 +38,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = OrderBy.class)
 @ConditionProcessor(targetAnnotation = OrderBy.class)
-public class OrderByProcessor<QUERY extends AbstractQuery, ENTITY>
+public class OrderByProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<OrderBy, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override

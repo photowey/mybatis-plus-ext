@@ -38,7 +38,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = Timestamp.class)
 @ConditionProcessor(targetAnnotation = Timestamp.class)
-public class TimestampProcessor<QUERY extends AbstractQuery, ENTITY>
+public class TimestampProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<Timestamp, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override

@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = Ne.class)
 @ConditionProcessor(targetAnnotation = Ne.class)
-public class NeProcessor<QUERY extends AbstractQuery, ENTITY>
+public class NeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<Ne, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override

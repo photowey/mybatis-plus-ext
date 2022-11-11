@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = NotExists.class)
 @ConditionProcessor(targetAnnotation = NotExists.class)
-public class NotExistsProcessor<QUERY extends AbstractQuery, ENTITY>
+public class NotExistsProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<NotExists, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override

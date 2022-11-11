@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = NotLike.class)
 @ConditionProcessor(targetAnnotation = NotLike.class)
-public class NotLikeProcessor<QUERY extends AbstractQuery, ENTITY>
+public class NotLikeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<NotLike, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override

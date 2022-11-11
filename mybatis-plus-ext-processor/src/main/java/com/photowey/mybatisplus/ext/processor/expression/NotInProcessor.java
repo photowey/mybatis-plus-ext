@@ -37,7 +37,7 @@ import java.util.Collection;
  */
 @ExpressionProcessor(targetAnnotation = NotIn.class)
 @ConditionProcessor(targetAnnotation = NotIn.class)
-public class NotInProcessor<QUERY extends AbstractQuery, ENTITY>
+public class NotInProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<NotIn, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override
