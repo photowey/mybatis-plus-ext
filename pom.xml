@@ -175,15 +175,11 @@
 
     <distributionManagement>
         <repository>
-            <id>nexus-releases</id>
-            <name>nexus releases repository</name>
-            <url>http://47.105.115.124:8081/repository/cloud-tube-releases/</url>
+            <id>dev</id>
+            <name>local</name>
+            <!-- win11 -->
+            <url>file:///D:/software/maven/nexus-maven/repo/repository</url>
         </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>nexus snapshots repository</name>
-            <url>http://47.105.115.124:8081/repository/cloud-tube-snapshots/</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <build>
