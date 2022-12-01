@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.photowey.mybatisplus.ext.annotation.validation.Emptable;
 import com.photowey.mybatisplus.ext.annotation.validation.NotNull;
@@ -457,6 +458,61 @@ public interface RepositoryExt<T> extends BaseMapper<T> {
         if (null == value) {
             throw new NullPointerException("the param value can't be null");
         }
+    }
+
+    /**
+     * 判断主键是否存在
+     *
+     * @param pk   主键标识
+     * @param <PK> 主键类型
+     * @return {@code boolean}
+     */
+    default <PK> boolean existz(PK pk) {
+        return this.exists(this.createQueryWrapper().eq("id", pk));
+    }
+
+    /**
+     * 判断主键是否存在
+     * |- 如果存在, 则执行回调函数 {@code then}
+     *
+     * @param pk   主键标识
+     * @param fx   {@link QueryWrapper}回调函数
+     * @param then 回调函数
+     * @param <PK> 主键类型
+     * @return {@code boolean}
+     */
+    default <PK> boolean existz(PK pk, Consumer<QueryWrapper<T>> fx, Consumer<T> then) {
+        QueryWrapper<T> wrapper = this.createQueryWrapper().eq("id", pk);
+        fx.accept(wrapper);
+        T t = this.selectOne(wrapper);
+        boolean exists = ObjectUtils.isNotNull(t);
+        if (exists) {
+            then.accept(t);
+        }
+
+        return exists;
+    }
+
+    /**
+     * 判断主键是否存在
+     * |- 如果存在, 则执行回调函数 {@code then}
+     *
+     * @param pk   主键标识
+     * @param fx   {@link LambdaQueryWrapper}回调函数
+     * @param then 回调函数
+     * @param <PK> 主键类型
+     * @return {@code boolean}
+     */
+    default <PK> boolean lambdaExistz(PK pk, Consumer<LambdaQueryWrapper<T>> fx, Consumer<T> then) {
+        LambdaQueryWrapper<T> wrapper = this.createLambdaQueryWrapper();
+        fx.accept(wrapper);
+        T t = this.selectOne(wrapper);
+        boolean exists = ObjectUtils.isNotNull(t);
+        if (exists) {
+            then.accept(t);
+        }
+
+        return exists;
     }
 
     default QueryWrapper<T> createQueryWrapper() {
