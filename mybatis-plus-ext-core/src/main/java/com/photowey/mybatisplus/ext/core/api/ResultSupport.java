@@ -37,6 +37,8 @@ public abstract class ResultSupport<T, R extends ResultSupport<T, R>> implements
 
     private static final long serialVersionUID = -8479667319465108597L;
 
+    public static final String API_OK = "000000";
+
     /**
      * 返回码
      */
@@ -91,5 +93,13 @@ public abstract class ResultSupport<T, R extends ResultSupport<T, R>> implements
     public R message(String message) {
         this.message = message;
         return (R) this;
+    }
+
+    public boolean requestSuccessful() {
+        return API_OK.equalsIgnoreCase(this.code);
+    }
+
+    public boolean requestFailure() {
+        return !this.requestSuccessful();
     }
 }
