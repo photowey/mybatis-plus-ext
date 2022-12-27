@@ -337,6 +337,12 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
         return (QueryWrapperExt<T>) super.between(column, from, to);
     }
 
+    public QueryWrapperExt<T> select(String... columns) {
+        super.select(columns);
+
+        return this;
+    }
+
     /**
      * 用于获取 {@link QueryWrapper} 自身对象,从而实现一些模板代码,进而提升 {@link QueryWrapper} 的灵活性
      * <p>

@@ -15,19 +15,13 @@
  */
 package com.photowey.mybatisplus.ext.core.api;
 
-import java.io.Serializable;
-
 /**
- * {@code DefaultStupid}
+ * {@code Empty}
  *
  * @author photowey
  * @date 2022/11/05
  * @since 1.1.0
  */
-public class DefaultStupid implements Serializable, Stupid {
-
-    private static final long serialVersionUID = 7553326780389638487L;
-
-    // no field
-
+public interface Empty {
+    // do nothing
 }
