@@ -18,6 +18,7 @@ package com.photowey.mybatisplus.ext.query;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.photowey.mybatisplus.ext.annotation.validation.Emptable;
@@ -27,6 +28,7 @@ import com.photowey.mybatisplus.ext.validator.ValueValidator;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * {@code LambdaQueryWrapperExt}
@@ -338,6 +340,31 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
 
     public <V> LambdaQueryWrapperExt<T> between(SFunction<T, V> function, @Nullable V from, @Nullable V to) {
         return (LambdaQueryWrapperExt<T>) super.between(function, from, to);
+    }
+
+    /**
+     * 实现父类的 {@link LambdaQueryWrapper#select(SFunction[])} 方法
+     *
+     * @param columns 查询字段列表
+     * @return {@link LambdaQueryWrapperExt<T>}
+     */
+    public LambdaQueryWrapperExt<T> selector(SFunction<T, ?>... columns) {
+        super.select(columns);
+
+        return this;
+    }
+
+    /**
+     * 实现父类的 {@link LambdaQueryWrapper#select(Class, Predicate)} 方法
+     *
+     * @param entityClass 实体 {@link Class}
+     * @param predicate   过滤方式
+     * @return {@link LambdaQueryWrapperExt<T>}
+     */
+    public LambdaQueryWrapperExt<T> select(Class<T> entityClass, Predicate<TableFieldInfo> predicate) {
+        super.select(entityClass, predicate);
+
+        return this;
     }
 
     /**

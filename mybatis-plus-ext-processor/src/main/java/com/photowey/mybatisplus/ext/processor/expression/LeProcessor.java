@@ -16,11 +16,11 @@
 package com.photowey.mybatisplus.ext.processor.expression;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.photowey.mybatisplus.ext.annotation.ConditionProcessor;
 import com.photowey.mybatisplus.ext.annotation.Le;
 import com.photowey.mybatisplus.ext.annotation.component.ExpressionProcessor;
 import com.photowey.mybatisplus.ext.processor.model.query.AbstractQuery;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 
@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = Le.class)
 @ConditionProcessor(targetAnnotation = Le.class)
-public class LeProcessor<QUERY extends AbstractQuery, ENTITY>
+public class LeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<Le, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override
@@ -49,11 +49,11 @@ public class LeProcessor<QUERY extends AbstractQuery, ENTITY>
         }
 
         String columnName = criteriaAnnotation.alias();
-        if (StringUtils.isEmpty(columnName)) {
+        if (ObjectUtils.isEmpty(columnName)) {
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.le(null != value, columnName, value);
+        queryWrapper.le(ObjectUtils.isNotEmpty(value), columnName, value);
 
         return true;
     }

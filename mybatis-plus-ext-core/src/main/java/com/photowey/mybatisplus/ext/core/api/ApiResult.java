@@ -15,6 +15,7 @@
  */
 package com.photowey.mybatisplus.ext.core.api;
 
+import com.photowey.mybatisplus.ext.core.api.factory.EmptyEntityFactory;
 import com.photowey.mybatisplus.ext.core.enums.ExceptionStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -58,7 +59,7 @@ public class ApiResult<T> extends ResultSupportAdapter<T, ApiResult<T>> {
      * @return {@link ApiResult<T>}
      */
     public static <T> ApiResult<T> success() {
-        return new ApiResult<>(ExceptionStatusEnum.OK.code(), ExceptionStatusEnum.OK.message(), (T) new DefaultStupid());
+        return new ApiResult<>(ExceptionStatusEnum.OK.code(), ExceptionStatusEnum.OK.message(), (T) EmptyEntityFactory.empty());
     }
 
     /**
@@ -105,7 +106,7 @@ public class ApiResult<T> extends ResultSupportAdapter<T, ApiResult<T>> {
      */
     public static <T> ApiResult<T> failure(Map<String, Object> additional) {
         ApiResult<T> apiResult = create();
-        return apiResult.of(ExceptionStatusEnum.INNER_ERROR.code(), ExceptionStatusEnum.INNER_ERROR.message(), null, additional);
+        return apiResult.of(ExceptionStatusEnum.INNER_ERROR.code(), ExceptionStatusEnum.INNER_ERROR.message(), (T) EmptyEntityFactory.empty(), additional);
     }
 
     /**

@@ -13,15 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.photowey.mybatisplus.ext.core.api;
+package com.photowey.mybatisplus.ext.core.api.factory;
+
+import com.photowey.mybatisplus.ext.core.api.DefaultEmpty;
+import com.photowey.mybatisplus.ext.core.api.Empty;
 
 /**
- * {@code Stupid}
+ * {@code EmptyEntityFactory}
  *
  * @author photowey
- * @date 2022/11/05
+ * @date 2022/12/27
  * @since 1.1.0
  */
-public interface Stupid {
-    // do nothing
+public class EmptyEntityFactory implements EntityFactory<Empty> {
+
+    @Override
+    public Empty createEntity() {
+        return empty();
+    }
+
+    public static Empty empty() {
+        return new DefaultEmpty();
+    }
 }

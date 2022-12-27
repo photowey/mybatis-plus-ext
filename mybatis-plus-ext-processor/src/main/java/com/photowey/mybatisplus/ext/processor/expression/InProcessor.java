@@ -21,7 +21,6 @@ import com.photowey.mybatisplus.ext.annotation.ConditionProcessor;
 import com.photowey.mybatisplus.ext.annotation.In;
 import com.photowey.mybatisplus.ext.annotation.component.ExpressionProcessor;
 import com.photowey.mybatisplus.ext.processor.model.query.AbstractQuery;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -38,7 +37,7 @@ import java.util.Collection;
  */
 @ExpressionProcessor(targetAnnotation = In.class)
 @ConditionProcessor(targetAnnotation = In.class)
-public class InProcessor<QUERY extends AbstractQuery, ENTITY>
+public class InProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<In, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override
@@ -51,7 +50,7 @@ public class InProcessor<QUERY extends AbstractQuery, ENTITY>
         }
 
         String columnName = criteriaAnnotation.alias();
-        if (StringUtils.isEmpty(columnName)) {
+        if (ObjectUtils.isEmpty(columnName)) {
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;

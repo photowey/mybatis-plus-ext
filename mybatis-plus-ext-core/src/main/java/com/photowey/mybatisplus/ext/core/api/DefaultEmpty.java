@@ -13,16 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.photowey.mybatisplus.ext.core.api.factory;
+package com.photowey.mybatisplus.ext.core.api;
+
+import java.io.Serializable;
 
 /**
- * {@code EntityFactory}
+ * {@code DefaultEmpty}
  *
  * @author photowey
  * @date 2022/11/05
  * @since 1.1.0
  */
-public interface EntityFactory<T> extends Factory {
+public class DefaultEmpty implements Serializable, Empty {
 
-    T createEntity();
+    private static final long serialVersionUID = 7553326780389638487L;
+
+    // no field
+
 }

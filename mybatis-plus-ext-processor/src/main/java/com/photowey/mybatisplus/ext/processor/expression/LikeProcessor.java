@@ -17,11 +17,11 @@ package com.photowey.mybatisplus.ext.processor.expression;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.photowey.mybatisplus.ext.annotation.ConditionProcessor;
 import com.photowey.mybatisplus.ext.annotation.Like;
 import com.photowey.mybatisplus.ext.annotation.component.ExpressionProcessor;
 import com.photowey.mybatisplus.ext.processor.model.query.AbstractQuery;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 
@@ -37,7 +37,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = Like.class)
 @ConditionProcessor(targetAnnotation = Like.class)
-public class LikeProcessor<QUERY extends AbstractQuery, ENTITY>
+public class LikeProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<Like, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override
@@ -50,20 +50,20 @@ public class LikeProcessor<QUERY extends AbstractQuery, ENTITY>
         }
 
         String columnName = criteriaAnnotation.alias();
-        if (StringUtils.isEmpty(columnName)) {
+        if (ObjectUtils.isEmpty(columnName)) {
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
         SqlLike like = criteriaAnnotation.like();
         switch (like) {
             case LEFT:
-                queryWrapper.likeLeft(null != value, columnName, value);
+                queryWrapper.likeLeft(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
             case RIGHT:
-                queryWrapper.likeRight(null != value, columnName, value);
+                queryWrapper.likeRight(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
             case DEFAULT:
-                queryWrapper.like(null != value, columnName, value);
+                queryWrapper.like(ObjectUtils.isNotEmpty(value), columnName, value);
                 break;
             default:
                 break;

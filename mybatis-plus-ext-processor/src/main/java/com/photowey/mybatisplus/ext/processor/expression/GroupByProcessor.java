@@ -16,11 +16,11 @@
 package com.photowey.mybatisplus.ext.processor.expression;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.photowey.mybatisplus.ext.annotation.ConditionProcessor;
 import com.photowey.mybatisplus.ext.annotation.GroupBy;
 import com.photowey.mybatisplus.ext.annotation.component.ExpressionProcessor;
 import com.photowey.mybatisplus.ext.processor.model.query.AbstractQuery;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 
@@ -36,7 +36,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = GroupBy.class)
 @ConditionProcessor(targetAnnotation = GroupBy.class)
-public class GroupByProcessor<QUERY extends AbstractQuery, ENTITY>
+public class GroupByProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<GroupBy, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override
@@ -49,11 +49,11 @@ public class GroupByProcessor<QUERY extends AbstractQuery, ENTITY>
         }
 
         String columnName = criteriaAnnotation.alias();
-        if (StringUtils.isEmpty(columnName)) {
+        if (ObjectUtils.isEmpty(columnName)) {
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
-        queryWrapper.groupBy(null != value, columnName);
+        queryWrapper.groupBy(ObjectUtils.isNotEmpty(value), columnName);
 
         return true;
     }

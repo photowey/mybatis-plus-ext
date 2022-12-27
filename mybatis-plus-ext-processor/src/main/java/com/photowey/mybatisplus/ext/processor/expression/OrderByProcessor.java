@@ -16,13 +16,13 @@
 package com.photowey.mybatisplus.ext.processor.expression;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.photowey.mybatisplus.ext.annotation.ConditionProcessor;
 import com.photowey.mybatisplus.ext.annotation.OrderBy;
 import com.photowey.mybatisplus.ext.annotation.component.ExpressionProcessor;
 import com.photowey.mybatisplus.ext.enmus.OrderByEnum;
 import com.photowey.mybatisplus.ext.enmus.OrderByMechanismEnum;
 import com.photowey.mybatisplus.ext.processor.model.query.AbstractQuery;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
 
@@ -38,7 +38,7 @@ import java.lang.reflect.Field;
  */
 @ExpressionProcessor(targetAnnotation = OrderBy.class)
 @ConditionProcessor(targetAnnotation = OrderBy.class)
-public class OrderByProcessor<QUERY extends AbstractQuery, ENTITY>
+public class OrderByProcessor<QUERY extends AbstractQuery<ENTITY>, ENTITY>
         extends CriteriaAnnotationProcessorAdaptor<OrderBy, QUERY, QueryWrapper<ENTITY>, ENTITY> {
 
     @Override
@@ -53,17 +53,17 @@ public class OrderByProcessor<QUERY extends AbstractQuery, ENTITY>
             value = "1";
         }
         String columnName = criteriaAnnotation.alias();
-        if (StringUtils.isEmpty(columnName)) {
+        if (ObjectUtils.isEmpty(columnName)) {
             columnName = this.columnName(field, criteriaAnnotation.naming());
         }
         assert columnName != null;
         OrderByEnum orderBy = criteriaAnnotation.orderBy();
         switch (orderBy) {
             case DESC:
-                queryWrapper.orderByDesc(null != value, columnName);
+                queryWrapper.orderByDesc(ObjectUtils.isNotEmpty(value), columnName);
                 break;
             default:
-                queryWrapper.orderByAsc(null != value, columnName);
+                queryWrapper.orderByAsc(ObjectUtils.isNotEmpty(value), columnName);
                 break;
         }
 
