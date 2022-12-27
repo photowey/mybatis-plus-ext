@@ -1,2 +1,2 @@
+#com.photowey.mybatisplus.ext.config.MybatisPlusPaginationAutoConfigure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.photowey.mybatisplus.ext.config.MybatisPlusPaginationAutoConfigure

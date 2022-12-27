@@ -1,2 +1,3 @@
+# Use spring imports instead
+#com.photowey.mybatisplus.ext.processor.config.ConditionAnnotationProcessorAutoConfigure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.photowey.mybatisplus.ext.processor.config.ConditionAnnotationProcessorAutoConfigure

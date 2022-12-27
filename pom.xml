@@ -54,7 +54,7 @@
         <jackson-databind.version>2.13.4.1</jackson-databind.version>
 
         <!-- 当出现版本冲突的时候, 可以尝试自定义版本号 -->
-        <spring-boot.version>2.6.2</spring-boot.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
         <spring.version>5.3.20</spring.version>
     </properties>
 

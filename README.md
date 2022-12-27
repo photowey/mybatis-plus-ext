@@ -5,6 +5,8 @@
 
 > 扩展项:
 
+
+
 ## `v1.0.0`
 
 ### 1.[`QueryWrapper` 扩展 ](./doc/query-wrapper-ext.md)
@@ -98,3 +100,13 @@
 ### 6.更新
 
 > 更新 `mybatis-plus` 版本至 `3.5.2`
+
+## `v1.2.0`
+
+### 1.更新 `Spring Boot` 版本
+
+> `v2.7.5`
+
+### 2.升级 `SPI`
+
+> `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`
