@@ -20,7 +20,9 @@ import com.photowey.mybatisplus.ext.processor.advisor.TimeProcessorContainer;
 import com.photowey.mybatisplus.ext.processor.time.ITimeProcessor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.annotation.Role;
 
 /**
  * {@code TimeProcessorBeanPostProcessor}
@@ -30,6 +32,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  * @date 2022/02/19
  * @since 1.0.0
  */
+@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class TimeProcessorBeanPostProcessor implements BeanPostProcessor, DisposableBean {
 
     @Override

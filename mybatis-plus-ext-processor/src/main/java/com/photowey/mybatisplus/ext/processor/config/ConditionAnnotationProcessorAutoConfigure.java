@@ -20,12 +20,12 @@ import com.photowey.mybatisplus.ext.processor.component.TimeProcessorBeanPostPro
 import com.photowey.mybatisplus.ext.processor.condition.DefaultConditionHandler;
 import com.photowey.mybatisplus.ext.processor.condition.IConditionHandler;
 import com.photowey.mybatisplus.ext.processor.context.ApplicationContextInjector;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Role;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * {@code ConditionAnnotationProcessorAutoConfigure}
@@ -35,12 +35,21 @@ import org.springframework.context.annotation.Role;
  * @since 1.0.0
  */
 @AutoConfiguration
-@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
-@ComponentScan(value = {
-        "com.photowey.mybatisplus.ext.processor.expression",
-        "com.photowey.mybatisplus.ext.processor.time"
+@Import(value = {
+        ConditionProcessorBeanPostProcessor.class,
+        TimeProcessorBeanPostProcessor.class,
+        ConditionAnnotationProcessorAutoConfigure.ComponentConfigure.class,
 })
 public class ConditionAnnotationProcessorAutoConfigure {
+
+    @Configuration
+    @ComponentScan(value = {
+            "com.photowey.mybatisplus.ext.processor.expression",
+            "com.photowey.mybatisplus.ext.processor.time"
+    })
+    static class ComponentConfigure {
+
+    }
 
     @Bean
     public ApplicationContextInjector applicationContextInjector() {
@@ -57,15 +66,5 @@ public class ConditionAnnotationProcessorAutoConfigure {
     @ConditionalOnMissingBean(IConditionHandler.class)
     public IConditionHandler defaultConditionHandler() {
         return new DefaultConditionHandler();
-    }
-
-    @Bean
-    public ConditionProcessorBeanPostProcessor conditionProcessorBeanPostProcessor() {
-        return new ConditionProcessorBeanPostProcessor();
-    }
-
-    @Bean
-    public TimeProcessorBeanPostProcessor timeProcessorBeanPostProcessor() {
-        return new TimeProcessorBeanPostProcessor();
     }
 }
