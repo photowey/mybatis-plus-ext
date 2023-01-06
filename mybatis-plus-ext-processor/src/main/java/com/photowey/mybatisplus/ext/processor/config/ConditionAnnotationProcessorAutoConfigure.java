@@ -20,10 +20,12 @@ import com.photowey.mybatisplus.ext.processor.component.TimeProcessorBeanPostPro
 import com.photowey.mybatisplus.ext.processor.condition.DefaultConditionHandler;
 import com.photowey.mybatisplus.ext.processor.condition.IConditionHandler;
 import com.photowey.mybatisplus.ext.processor.context.ApplicationContextInjector;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
 
 /**
  * {@code ConditionAnnotationProcessorAutoConfigure}
@@ -32,7 +34,8 @@ import org.springframework.context.annotation.Configuration;
  * @date 2022/02/17
  * @since 1.0.0
  */
-@Configuration
+@AutoConfiguration
+@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 @ComponentScan(value = {
         "com.photowey.mybatisplus.ext.processor.expression",
         "com.photowey.mybatisplus.ext.processor.time"
