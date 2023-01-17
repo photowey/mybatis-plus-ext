@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 the original author or authors (photowey@gmail.com)
+ * Copyright © 2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,12 @@ import com.photowey.mybatisplus.ext.processor.component.TimeProcessorBeanPostPro
 import com.photowey.mybatisplus.ext.processor.condition.DefaultConditionHandler;
 import com.photowey.mybatisplus.ext.processor.condition.IConditionHandler;
 import com.photowey.mybatisplus.ext.processor.context.ApplicationContextInjector;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * {@code ConditionAnnotationProcessorAutoConfigure}
@@ -32,12 +34,22 @@ import org.springframework.context.annotation.Configuration;
  * @date 2022/02/17
  * @since 1.0.0
  */
-@Configuration
-@ComponentScan(value = {
-        "com.photowey.mybatisplus.ext.processor.expression",
-        "com.photowey.mybatisplus.ext.processor.time"
+@AutoConfiguration
+@Import(value = {
+        ConditionProcessorBeanPostProcessor.class,
+        TimeProcessorBeanPostProcessor.class,
+        ConditionAnnotationProcessorAutoConfigure.ComponentConfigure.class,
 })
 public class ConditionAnnotationProcessorAutoConfigure {
+
+    @Configuration
+    @ComponentScan(value = {
+            "com.photowey.mybatisplus.ext.processor.expression",
+            "com.photowey.mybatisplus.ext.processor.time"
+    })
+    static class ComponentConfigure {
+
+    }
 
     @Bean
     public ApplicationContextInjector applicationContextInjector() {
@@ -54,15 +66,5 @@ public class ConditionAnnotationProcessorAutoConfigure {
     @ConditionalOnMissingBean(IConditionHandler.class)
     public IConditionHandler defaultConditionHandler() {
         return new DefaultConditionHandler();
-    }
-
-    @Bean
-    public ConditionProcessorBeanPostProcessor conditionProcessorBeanPostProcessor() {
-        return new ConditionProcessorBeanPostProcessor();
-    }
-
-    @Bean
-    public TimeProcessorBeanPostProcessor timeProcessorBeanPostProcessor() {
-        return new TimeProcessorBeanPostProcessor();
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 the original author or authors (photowey@gmail.com)
+ * Copyright © 2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,9 @@ import com.photowey.mybatisplus.ext.processor.advisor.CriteriaAnnotationProcesso
 import com.photowey.mybatisplus.ext.processor.expression.CriteriaAnnotationProcessor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.annotation.Role;
 
 import java.lang.annotation.Annotation;
 
@@ -32,6 +34,7 @@ import java.lang.annotation.Annotation;
  * @date 2022/02/19
  * @since 1.0.0
  */
+@Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class ConditionProcessorBeanPostProcessor implements BeanPostProcessor, DisposableBean {
 
     @Override
