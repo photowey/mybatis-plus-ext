@@ -17,6 +17,7 @@ package com.photowey.mybatisplus.ext.core.pagination;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.photowey.mybatisplus.ext.annotation.DynamicSelect;
 import com.photowey.mybatisplus.ext.core.sort.SortColumn;
 import com.photowey.mybatisplus.ext.enmus.OrderByEnum;
@@ -68,8 +69,11 @@ public abstract class AbstractPaginationModel implements IPagination, Serializab
 
     /**
      * 参与排序的字段列表
+     *
+     * @since 1.3.0 隐藏属性 {@code sortColumns},不接受前端传值, 所有的操作,开发者必须心知肚明
      */
-    @ApiModelProperty(value = "参与排序的字段列表", required = false)
+    @JsonIgnore
+    @ApiModelProperty(value = "参与排序的字段列表", required = false, hidden = true)
     protected Set<SortColumn> sortColumns = new HashSet<>();
 
     /**
@@ -98,6 +102,7 @@ public abstract class AbstractPaginationModel implements IPagination, Serializab
         this.pageSize = pageSize;
     }
 
+    @JsonIgnore
     public Boolean isQueryList() {
         return this.getQueryList();
     }
@@ -120,6 +125,7 @@ public abstract class AbstractPaginationModel implements IPagination, Serializab
     }
 
     @Override
+    @JsonIgnore
     public Set<SortColumn> getSortColumns() {
         return this.sortColumns;
     }
