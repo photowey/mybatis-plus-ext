@@ -15,19 +15,19 @@
  */
 package com.photowey.mybatisplus.ext.meta.filler;
 
-import com.photowey.mybatisplus.ext.core.domain.entity.StandardEntity;
+import com.photowey.mybatisplus.ext.core.domain.entity.SpecialEntity;
 import org.apache.ibatis.reflection.MetaObject;
 
 import java.util.Objects;
 
 /**
- * {@code StandardMetaPropertiesFiller}
+ * {@code SpecialMetaPropertiesFiller}
  *
  * @author photowey
- * @date 2022/02/17
- * @since 1.0.0
+ * @date 2023/04/26
+ * @since 1.3.0
  */
-public class StandardMetaPropertiesFiller extends AbstractMetaPropertiesFillerAdaptor {
+public class SpecialMetaPropertiesFiller extends AbstractMetaPropertiesFillerAdaptor {
 
     /**
      * 特别注意: createTime 和 updateTime
@@ -38,8 +38,8 @@ public class StandardMetaPropertiesFiller extends AbstractMetaPropertiesFillerAd
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof StandardEntity) {
-            StandardEntity abstractEntity = (StandardEntity) metaObject.getOriginalObject();
+        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof SpecialEntity) {
+            SpecialEntity abstractEntity = (SpecialEntity) metaObject.getOriginalObject();
             super.handleInsertFill(abstractEntity);
         }
     }
@@ -51,8 +51,8 @@ public class StandardMetaPropertiesFiller extends AbstractMetaPropertiesFillerAd
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof StandardEntity) {
-            StandardEntity abstractEntity = (StandardEntity) metaObject.getOriginalObject();
+        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof SpecialEntity) {
+            SpecialEntity abstractEntity = (SpecialEntity) metaObject.getOriginalObject();
             super.handleUpdateFill(metaObject, abstractEntity);
         }
     }

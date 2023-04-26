@@ -17,54 +17,46 @@ package com.photowey.mybatisplus.ext.core.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 
 import java.time.LocalDateTime;
 
 /**
- * {@code BaseEntity}
+ * {@code CreatorEntity}
  * 实体数据模型-抽象
  *
  * @param <T> {@link T} 类型
  * @author photowey
- * @date 2022/02/17
- * @since 1.0.0
+ * @date 2023/04/26
+ * @since 1.3.0
  */
-public abstract class BaseEntity<T> implements RootEntity {
+public abstract class CreatorEntity<T> extends StandardEntity<T> implements RootEntity {
 
     /**
      * 创建时间
      */
-    @TableField(value = "gmt_create", fill = FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     protected LocalDateTime createTime;
     /**
      * 最后更新时间
      * 第一次执行 == {@code createTime}
      */
-    @TableField(value = "gmt_modified", fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     protected LocalDateTime updateTime;
+
     /**
      * 创建者
      * <p>
      * 使用 String 类型的原因是,未来可能会存在非数值的情况,留好拓展性
      */
     @TableField(fill = FieldFill.INSERT)
-    protected String createBy;
+    protected Long createBy;
     /**
      * 更新者
      * <p>
      * 使用 String 类型的原因是,未来可能会存在非数值的情况,留好拓展性
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    protected String updateBy;
-    /**
-     * 是否删除
-     * deleted == 1 被删除 - 失效
-     * deleted == 0 未被删除 - 有效
-     */
-    @TableLogic
-    @TableField(fill = FieldFill.INSERT)
-    protected Integer deleted;
+    protected Long updateBy;
 
     @Override
     public LocalDateTime getCreateTime() {
@@ -87,31 +79,22 @@ public abstract class BaseEntity<T> implements RootEntity {
     }
 
     @Override
-    public String getCreateBy() {
+    public Long getCreateBy() {
         return createBy;
     }
 
     @Override
-    public void setCreateBy(String createBy) {
+    public void setCreateBy(Long createBy) {
         this.createBy = createBy;
     }
 
     @Override
-    public String getUpdateBy() {
+    public Long getUpdateBy() {
         return updateBy;
     }
 
     @Override
-    public void setUpdateBy(String updateBy) {
+    public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    @Override
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
     }
 }

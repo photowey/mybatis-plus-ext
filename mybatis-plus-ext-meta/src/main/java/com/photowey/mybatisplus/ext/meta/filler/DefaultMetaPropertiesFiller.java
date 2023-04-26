@@ -15,7 +15,7 @@
  */
 package com.photowey.mybatisplus.ext.meta.filler;
 
-import com.photowey.mybatisplus.ext.core.domain.entity.BaseEntity;
+import com.photowey.mybatisplus.ext.core.domain.entity.StandardEntity;
 import org.apache.ibatis.reflection.MetaObject;
 
 import java.util.Objects;
@@ -40,9 +40,9 @@ public class DefaultMetaPropertiesFiller extends AbstractMetaPropertiesFillerAda
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof BaseEntity) {
-            BaseEntity baseEntity = (BaseEntity) metaObject.getOriginalObject();
-            super.handleInsertFill(baseEntity);
+        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof StandardEntity) {
+            StandardEntity standardEntity = (StandardEntity) metaObject.getOriginalObject();
+            super.handleInsertFill(standardEntity);
         }
     }
 
@@ -53,9 +53,9 @@ public class DefaultMetaPropertiesFiller extends AbstractMetaPropertiesFillerAda
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof BaseEntity) {
-            BaseEntity baseEntity = (BaseEntity) metaObject.getOriginalObject();
-            super.handleUpdateFill(metaObject, baseEntity);
+        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof StandardEntity) {
+            StandardEntity standardEntity = (StandardEntity) metaObject.getOriginalObject();
+            super.handleUpdateFill(metaObject, standardEntity);
         }
 
     }

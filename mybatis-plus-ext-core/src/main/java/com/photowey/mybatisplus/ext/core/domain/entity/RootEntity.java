@@ -60,28 +60,28 @@ public interface RootEntity extends Serializable {
      *
      * @param createBy 创建人
      */
-    void setCreateBy(String createBy);
+    void setCreateBy(Long createBy);
 
     /**
      * 获取-创建人
      *
      * @return 创建人
      */
-    String getCreateBy();
+    Long getCreateBy();
 
     /**
      * 设置-更新人
      *
      * @param updateBy 更新人
      */
-    void setUpdateBy(String updateBy);
+    void setUpdateBy(Long updateBy);
 
     /**
      * 获取-更新人
      *
      * @return 更新人
      */
-    String getUpdateBy();
+    Long getUpdateBy();
 
     /**
      * 设置-删除标记

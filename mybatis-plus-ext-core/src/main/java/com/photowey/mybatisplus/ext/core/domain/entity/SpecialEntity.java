@@ -17,10 +17,11 @@ package com.photowey.mybatisplus.ext.core.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+
+import java.time.LocalDateTime;
 
 /**
- * {@code AbstractEntity}
+ * {@code SpecialEntity}
  * 实体数据模型-抽象
  * 相比与 {@link  StandardEntity}
  * 最大的区别就是 - {@code createTime}和 {@code updateTime} 没有添加别名
@@ -28,29 +29,41 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
  *
  * @param <T> {@link T} 类型
  * @author photowey
- * @date 2022/02/18
+ * @date 2023/04/26
  * @see <a src="https://developer.aliyun.com/topic/ebook">藏经阁</a>
- * @since 1.0.0
+ * @since 1.3.0
  */
-public abstract class AbstractEntity<T> implements RootEntity {
-
+public abstract class SpecialEntity<T> extends AbstractEntity<T> implements RootEntity {
 
     /**
-     * 是否删除
-     * deleted == 1 被删除 - 失效
-     * deleted == 0 未被删除 - 有效
+     * 创建时间
      */
-    @TableLogic
-    @TableField(fill = FieldFill.INSERT)
-    protected Integer deleted;
+    @TableField(value = "gmt_create", fill = FieldFill.INSERT)
+    protected LocalDateTime createTime;
+    /**
+     * 最后更新时间
+     * 第一次执行 == {@code createTime}
+     */
+    @TableField(value = "gmt_modified", fill = FieldFill.INSERT_UPDATE)
+    protected LocalDateTime updateTime;
 
-
-    public Integer getDeleted() {
-        return deleted;
+    @Override
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
     @Override
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    @Override
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    @Override
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 }

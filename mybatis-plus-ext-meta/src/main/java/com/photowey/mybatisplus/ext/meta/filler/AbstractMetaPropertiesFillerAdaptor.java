@@ -15,13 +15,18 @@
  */
 package com.photowey.mybatisplus.ext.meta.filler;
 
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.photowey.mybatisplus.ext.core.domain.entity.RootEntity;
+import com.photowey.mybatisplus.ext.core.domain.operator.Operator;
 import com.photowey.mybatisplus.ext.meta.operator.OperatorHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.ListableBeanFactory;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -33,24 +38,24 @@ import java.util.Objects;
  */
 public abstract class AbstractMetaPropertiesFillerAdaptor implements MetaPropertiesFiller {
 
-    protected ApplicationContext applicationContext;
+    protected ListableBeanFactory beanFactory;
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = (ListableBeanFactory) beanFactory;
     }
 
-    protected OperatorHandler loginUserHandler() {
-        OperatorHandler operatorHandler = null;
+    protected OperatorHandler tryAcquireOperatorHandler() {
         try {
-            operatorHandler = this.applicationContext.getBean(OperatorHandler.class);
+            // Select first
+            Map<String, OperatorHandler> beans = this.beanFactory.getBeansOfType(OperatorHandler.class);
+            if (ObjectUtils.isNotEmpty(beans)) {
+                return new ArrayList<>(beans.values()).get(0);
+            }
         } catch (Exception ignored) {
         }
-        if (null == operatorHandler) {
-            throw new NullPointerException(String.format("the [%s] subclass not found(404)", OperatorHandler.class.getName()));
-        }
 
-        return operatorHandler;
+        throw new NullPointerException("the handler: [com.photowey.mybatisplus.ext.meta.operator.OperatorHandler] subclass not found(404)");
     }
 
     protected void handleInsertFill(RootEntity rootEntity) {
@@ -61,13 +66,15 @@ public abstract class AbstractMetaPropertiesFillerAdaptor implements MetaPropert
         if (Objects.isNull(rootEntity.getUpdateTime())) {
             rootEntity.setUpdateTime(now);
         }
-        OperatorHandler operatorHandler = this.loginUserHandler();
-        String operator = operatorHandler.loadOperator();
-        if (Objects.nonNull(operator) && Objects.isNull(rootEntity.getCreateBy())) {
-            rootEntity.setCreateBy(operator);
+        OperatorHandler operatorHandler = this.tryAcquireOperatorHandler();
+        Operator operator = operatorHandler.tryAcquireOperator();
+        if (Objects.nonNull(operator)
+                && Objects.nonNull(operator.getOperatorId()) && Objects.isNull(rootEntity.getCreateBy())) {
+            rootEntity.setCreateBy(operator.getOperatorId());
         }
-        if (Objects.nonNull(operator) && Objects.isNull(rootEntity.getUpdateBy())) {
-            rootEntity.setUpdateBy(operator);
+        if (Objects.nonNull(operator)
+                && Objects.nonNull(operator.getOperatorId()) && Objects.isNull(rootEntity.getUpdateBy())) {
+            rootEntity.setUpdateBy(operator.getOperatorId());
         }
 
         rootEntity.setDeleted(0);
@@ -76,10 +83,11 @@ public abstract class AbstractMetaPropertiesFillerAdaptor implements MetaPropert
     protected void handleUpdateFill(MetaObject metaObject, RootEntity rootEntity) {
         LocalDateTime now = LocalDateTime.now();
         setFieldValByName("updateTime", now, metaObject);
-        OperatorHandler operatorHandler = this.loginUserHandler();
-        String operator = operatorHandler.loadOperator();
-        if (Objects.nonNull(operator)) {
-            setFieldValByName("updateBy", operator, metaObject);
+        OperatorHandler operatorHandler = this.tryAcquireOperatorHandler();
+        Operator operator = operatorHandler.tryAcquireOperator();
+        if (Objects.nonNull(operator)
+                && Objects.nonNull(operator.getOperatorId())) {
+            setFieldValByName("updateBy", operator.getOperatorId(), metaObject);
         }
     }
 }

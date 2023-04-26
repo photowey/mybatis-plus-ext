@@ -15,19 +15,20 @@
  */
 package com.photowey.mybatisplus.ext.meta.filler;
 
+import com.photowey.mybatisplus.ext.core.domain.entity.CreatorEntity;
 import com.photowey.mybatisplus.ext.core.domain.entity.StandardEntity;
 import org.apache.ibatis.reflection.MetaObject;
 
 import java.util.Objects;
 
 /**
- * {@code StandardMetaPropertiesFiller}
+ * {@code CreatorMetaPropertiesFiller}
  *
  * @author photowey
- * @date 2022/02/17
- * @since 1.0.0
+ * @date 2023/04/26
+ * @since 1.3.0
  */
-public class StandardMetaPropertiesFiller extends AbstractMetaPropertiesFillerAdaptor {
+public class CreatorMetaPropertiesFiller extends AbstractMetaPropertiesFillerAdaptor {
 
     /**
      * 特别注意: createTime 和 updateTime
@@ -38,6 +39,15 @@ public class StandardMetaPropertiesFiller extends AbstractMetaPropertiesFillerAd
      */
     @Override
     public void insertFill(MetaObject metaObject) {
+        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof CreatorEntity) {
+            CreatorEntity abstractEntity = (CreatorEntity) metaObject.getOriginalObject();
+            super.handleInsertFill(abstractEntity);
+            return;
+        }
+
+        // TODO 兼容: 有的实体需要 createBy 有的类不需要 createBy 的场景
+        //  在配置 SPI 的时候 就需要配置成
+        //  com.photowey.mybatisplus.ext.meta.filler.CreatorMetaPropertiesFiller
         if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof StandardEntity) {
             StandardEntity abstractEntity = (StandardEntity) metaObject.getOriginalObject();
             super.handleInsertFill(abstractEntity);
@@ -51,6 +61,13 @@ public class StandardMetaPropertiesFiller extends AbstractMetaPropertiesFillerAd
      */
     @Override
     public void updateFill(MetaObject metaObject) {
+        if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof CreatorEntity) {
+            CreatorEntity abstractEntity = (CreatorEntity) metaObject.getOriginalObject();
+            super.handleUpdateFill(metaObject, abstractEntity);
+            return;
+        }
+
+        // 兼容: 有的实体需要 createBy 有的类不需要 createBy 的场景
         if (Objects.nonNull(metaObject) && metaObject.getOriginalObject() instanceof StandardEntity) {
             StandardEntity abstractEntity = (StandardEntity) metaObject.getOriginalObject();
             super.handleUpdateFill(metaObject, abstractEntity);

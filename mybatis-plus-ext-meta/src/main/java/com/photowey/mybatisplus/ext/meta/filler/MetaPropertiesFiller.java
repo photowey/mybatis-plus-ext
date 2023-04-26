@@ -16,7 +16,7 @@
 package com.photowey.mybatisplus.ext.meta.filler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.BeanFactoryAware;
 
 /**
  * {@code MetaPropertiesFiller}
@@ -25,5 +25,5 @@ import org.springframework.context.ApplicationContextAware;
  * @date 2022/02/18
  * @since 1.0.0
  */
-public interface MetaPropertiesFiller extends MetaObjectHandler, ApplicationContextAware {
+public interface MetaPropertiesFiller extends MetaObjectHandler, BeanFactoryAware {
 }
