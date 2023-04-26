@@ -15,6 +15,8 @@
  */
 package com.photowey.mybatisplus.ext.meta.operator;
 
+import com.photowey.mybatisplus.ext.core.domain.operator.Operator;
+
 /**
  * {@code OperatorHandler}
  *
@@ -29,5 +31,5 @@ public interface OperatorHandler {
      *
      * @return 用户信息
      */
-    String loadOperator();
+    Operator tryAcquireOperator();
 }

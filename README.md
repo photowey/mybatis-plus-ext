@@ -1,11 +1,14 @@
-#  `Mybatis-Plus` 扩展项目 `Mybatis-Plus-Ext`
+# `Mybatis-Plus` 扩展项目 `Mybatis-Plus-Ext`
+
 > `Mybatis-Plus` 扩展, 目标是实现更大程度的简化开发
 >
 > > 文档暂未补全,详见示例工程 [mybatis-plus-ext-examples](https://github.com/photowey/mybatis-plus-ext-examples)
+> >
+> > - 示例项目有更新不及时问题
+
+
 
 > 扩展项:
-
-
 
 ## `v1.0.0`
 
@@ -18,6 +21,8 @@
 ### 4.[条件注解 ](./doc/condition-annotation.md)
 
 - 新增 `@Select` 注解
+
+
 
 ## `v1.1.0`
 
@@ -110,3 +115,50 @@
 ### 2.升级 `SPI`
 
 > `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`
+
+## `v1.3.0`
+
+> 在版本对字段的填充(`mybatis-plus-ext-meta` 模块)有一个破坏性修改
+>
+> 建议: 该版本新项目可升级
+
+### 1.重新定义 `Entity`
+
+- `AbstractEntity`
+  - 抽象实体
+- `CreatorEntity`
+  - 支持 `create_by` 和 `update_by` 实体
+  - 继承 `StandardEntity`
+- `RootEntity`
+  - 根接口
+- `SpecialEntity`
+  - 需要对时间字段做特殊处理(添加别名)
+    - `gmt_create`
+    - `gmt_modified`
+- `StandardEntity`
+  - 未对时间字段做特殊处理(添加别名)
+    - `create_time`
+    - `update_time`
+
+### 2.重新设计 `OperatorHandler`
+
+- `Operator tryAcquireOperator()`
+  - `com.photowey.mybatisplus.ext.core.domain.operator.Operator`
+
+### 3.`MetaPropertiesFiller` 实例 适配新的 `Entity` 设计
+
+- `CreatorMetaPropertiesFiller`
+  - 支持 `CreatorEntity`
+- `SpecialMetaPropertiesFiller`
+  - 支持 `SpecialEntity`
+- `DefaultMetaPropertiesFiller`
+  - 支持 `StandardEntity`
+
+### 4.`MetaPropertiesFiller` 注入
+
+- 改 `ApplicationContext` 为 `BeanFactory`
+
+### 5.`OperatorHandler` 加载策略修改
+
+- `Map<String, OperatorHandler> beans = this.beanFactory.getBeansOfType(OperatorHandler.class)`
+- 这样支持: `IOC` 容器中可能存在多个 `OperatorHandler` 实例场景
