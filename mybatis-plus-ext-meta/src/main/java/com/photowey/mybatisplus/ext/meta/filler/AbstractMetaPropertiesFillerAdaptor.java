@@ -16,6 +16,7 @@
 package com.photowey.mybatisplus.ext.meta.filler;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.photowey.mybatisplus.ext.core.domain.entity.CreatorEntity;
 import com.photowey.mybatisplus.ext.core.domain.entity.RootEntity;
 import com.photowey.mybatisplus.ext.core.domain.operator.Operator;
 import com.photowey.mybatisplus.ext.meta.operator.OperatorHandler;
@@ -58,36 +59,42 @@ public abstract class AbstractMetaPropertiesFillerAdaptor implements MetaPropert
         throw new NullPointerException("the handler: [com.photowey.mybatisplus.ext.meta.operator.OperatorHandler] subclass not found(404)");
     }
 
-    protected void handleInsertFill(RootEntity rootEntity) {
+    protected void handleInsertFill(RootEntity root) {
         LocalDateTime now = LocalDateTime.now();
-        if (Objects.isNull(rootEntity.getCreateTime())) {
-            rootEntity.setCreateTime(now);
+        if (Objects.isNull(root.getCreateTime())) {
+            root.setCreateTime(now);
         }
-        if (Objects.isNull(rootEntity.getUpdateTime())) {
-            rootEntity.setUpdateTime(now);
-        }
-        OperatorHandler operatorHandler = this.tryAcquireOperatorHandler();
-        Operator operator = operatorHandler.tryAcquireOperator();
-        if (Objects.nonNull(operator)
-                && Objects.nonNull(operator.getOperatorId()) && Objects.isNull(rootEntity.getCreateBy())) {
-            rootEntity.setCreateBy(operator.getOperatorId());
-        }
-        if (Objects.nonNull(operator)
-                && Objects.nonNull(operator.getOperatorId()) && Objects.isNull(rootEntity.getUpdateBy())) {
-            rootEntity.setUpdateBy(operator.getOperatorId());
+        if (Objects.isNull(root.getUpdateTime())) {
+            root.setUpdateTime(now);
         }
 
-        rootEntity.setDeleted(0);
+        if (root instanceof CreatorEntity) {
+            OperatorHandler operatorHandler = this.tryAcquireOperatorHandler();
+            Operator operator = operatorHandler.tryAcquireOperator();
+            if (Objects.nonNull(operator)
+                    && Objects.nonNull(operator.getOperatorId()) && Objects.isNull(root.getCreateBy())) {
+                root.setCreateBy(operator.getOperatorId());
+            }
+            if (Objects.nonNull(operator)
+                    && Objects.nonNull(operator.getOperatorId()) && Objects.isNull(root.getUpdateBy())) {
+                root.setUpdateBy(operator.getOperatorId());
+            }
+        }
+
+        root.setDeleted(0);
     }
 
-    protected void handleUpdateFill(MetaObject metaObject, RootEntity rootEntity) {
+    protected void handleUpdateFill(MetaObject metaObject, RootEntity root) {
         LocalDateTime now = LocalDateTime.now();
         setFieldValByName("updateTime", now, metaObject);
-        OperatorHandler operatorHandler = this.tryAcquireOperatorHandler();
-        Operator operator = operatorHandler.tryAcquireOperator();
-        if (Objects.nonNull(operator)
-                && Objects.nonNull(operator.getOperatorId())) {
-            setFieldValByName("updateBy", operator.getOperatorId(), metaObject);
+
+        if (root instanceof CreatorEntity) {
+            OperatorHandler operatorHandler = this.tryAcquireOperatorHandler();
+            Operator operator = operatorHandler.tryAcquireOperator();
+            if (Objects.nonNull(operator)
+                    && Objects.nonNull(operator.getOperatorId())) {
+                setFieldValByName("updateBy", operator.getOperatorId(), metaObject);
+            }
         }
     }
 }
