@@ -106,6 +106,8 @@
 
 > 更新 `mybatis-plus` 版本至 `3.5.2`
 
+
+
 ## `v1.2.0`
 
 ### 1.更新 `Spring Boot` 版本
@@ -162,3 +164,9 @@
 
 - `Map<String, OperatorHandler> beans = this.beanFactory.getBeansOfType(OperatorHandler.class)`
 - 这样支持: `IOC` 容器中可能存在多个 `OperatorHandler` 实例场景
+
+## `v1.4.0`
+
+- 新增: `mybatis-plus-ext-service`
+- 新增: `AbstractPayload` 抽象
+- 增强: 分页模型
