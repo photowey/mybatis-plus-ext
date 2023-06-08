@@ -16,11 +16,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-core</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.photowey</groupId>
             <artifactId>mybatis-plus-ext-annotation</artifactId>
         </dependency>

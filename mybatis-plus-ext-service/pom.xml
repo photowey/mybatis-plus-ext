@@ -9,24 +9,15 @@
         <version>1.4.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>mybatis-plus-ext-processor</artifactId>
+    <artifactId>mybatis-plus-ext-service</artifactId>
 
     <properties>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.photowey</groupId>
-            <artifactId>mybatis-plus-ext-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.photowey</groupId>
-            <artifactId>mybatis-plus-ext-query</artifactId>
+            <artifactId>mybatis-plus-ext-processor</artifactId>
         </dependency>
     </dependencies>
 
