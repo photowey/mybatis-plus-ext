@@ -23,6 +23,7 @@
         <module>mybatis-plus-ext-meta</module>
         <module>mybatis-plus-ext-processor</module>
         <module>mybatis-plus-ext-selector</module>
+        <module>mybatis-plus-ext-service</module>
     </modules>
 
     <scm>
@@ -128,6 +129,11 @@
             <dependency>
                 <groupId>com.photowey</groupId>
                 <artifactId>mybatis-plus-ext-selector</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.photowey</groupId>
+                <artifactId>mybatis-plus-ext-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -276,6 +282,7 @@ limitations under the License.
                         <exclude>**/*.txt</exclude>
                         <exclude>**/*.cmd</exclude>
                         <exclude>**/*.sh</exclude>
+                        <exclude>**/shared/**/*.sh</exclude>
                     </excludes>
                     <strictCheck>true</strictCheck>
                     <mapping>
