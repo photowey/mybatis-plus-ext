@@ -83,6 +83,18 @@ public abstract class AbstractPaginationModel implements IPagination, Serializab
     @ApiModelProperty(hidden = true)
     protected Set<String> fields = new HashSet<>();
 
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    public Integer getLimit() {
+        return this.getPageSize();
+    }
+
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    public Integer getOffset() {
+        return (this.getPageNo() - 1) * this.getPageSize();
+    }
+
     @Override
     public int getPageNo() {
         // 排除绕过框架验证 - 手动设置 非法的值
@@ -100,6 +112,19 @@ public abstract class AbstractPaginationModel implements IPagination, Serializab
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public void selectOne() {
+        this.selectPage(1, 1);
+    }
+
+    public void selectLimit(int pageSize) {
+        this.selectPage(1, pageSize);
+    }
+
+    public void selectPage(int current, int pageSize) {
+        this.setPageNo(current);
+        this.setPageSize(pageSize);
     }
 
     @JsonIgnore

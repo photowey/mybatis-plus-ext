@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.uphicoo</groupId>
+            <groupId>com.photowey</groupId>
             <artifactId>mybatis-plus-ext-processor</artifactId>
         </dependency>
     </dependencies>
