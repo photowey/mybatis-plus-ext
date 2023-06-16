@@ -96,12 +96,29 @@ public class PageResult<T> extends ResultSupportAdapter<T, PageResult<T>> {
      * 构造静态响应结果
      *
      * @param data       列表数据
+     * @param meta       分页 Meta 元数据
+     * @param additional 附加参数列表
+     * @return 响应结果
+     */
+    public static <T> PageResult<T> ofStatic(List<T> data, Meta meta, Map<String, Object> additional) {
+        PageResult<T> pageResult = PageResult.create();
+        return pageResult.of(data, meta, additional);
+    }
+
+    /**
+     * 构造静态响应结果
+     *
+     * @param data       列表数据
      * @param additional 附加参数列表
      * @return 响应结果
      */
     public static <T> PageResult<T> ofStatic(List<T> data, Map<String, Object> additional) {
         PageResult<T> pageResult = PageResult.create();
         return pageResult.of(data, additional);
+    }
+
+    public PageResult<T> of(List<T> data, Meta meta, Map<String, Object> additional) {
+        return this.of(ExceptionStatusEnum.OK.code(), ExceptionStatusEnum.OK.message(), data, meta, additional);
     }
 
     /**

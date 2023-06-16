@@ -67,6 +67,9 @@ public abstract class AbstractPaginationModel implements IPagination, Serializab
     @ApiModelProperty(hidden = true)
     protected Boolean queryList = Boolean.FALSE;
 
+    @ApiModelProperty(hidden = true)
+    private Long totalCount;
+
     /**
      * 参与排序的字段列表
      *
@@ -93,6 +96,16 @@ public abstract class AbstractPaginationModel implements IPagination, Serializab
     @ApiModelProperty(hidden = true)
     public Integer getOffset() {
         return (this.getPageNo() - 1) * this.getPageSize();
+    }
+
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    public Long getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Long totalCount) {
+        this.totalCount = totalCount;
     }
 
     @Override

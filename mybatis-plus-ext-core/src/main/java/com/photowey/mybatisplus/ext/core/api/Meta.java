@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.photowey.mybatisplus.ext.core.pagination.AbstractPaginationModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -96,6 +97,10 @@ public class Meta implements Serializable {
                 .pageSize(page.getData().pageSize())
                 .total(page.getData().count())
                 .build();
+    }
+
+    public static Meta populateMeta(AbstractPaginationModel model) {
+        return Meta.populateMeta(model.getTotalCount(), (long) model.getPageNo(), (long) model.getPageSize());
     }
 
     public static Meta populateDefaultMeta() {
