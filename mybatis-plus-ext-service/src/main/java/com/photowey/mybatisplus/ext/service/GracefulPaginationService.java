@@ -36,7 +36,12 @@ public interface GracefulPaginationService<T> extends CounterService<T> {
      * @param query {@link Q}
      * @return {@link IPage <T>}
      */
-    <Q extends AbstractQuery<T>> IPage<T> dynamicPage(Q query);
+    default <Q extends AbstractQuery<T>> IPage<T> dynamicPage(Q query) {
+        IPage<T> page = query.populatePage();
+        page.setRecords(new ArrayList<>(0));
+
+        return page;
+    }
 
     /**
      * 优雅的动态
