@@ -95,6 +95,26 @@ public abstract class ResultSupport<T, R extends ResultSupport<T, R>> implements
         return (R) this;
     }
 
+    /**
+     * Determine API request is OK.
+     *
+     * @return {@code boolean} true: ok false: failed
+     * @since 1.5.0
+     */
+    public boolean determineIsSuccessful() {
+        return this.requestSuccessful();
+    }
+
+    /**
+     * Determine API request is failed.
+     *
+     * @return {@code boolean} true: failed false: ok
+     * @since 1.5.0
+     */
+    public boolean determineIsFailed() {
+        return this.requestFailure();
+    }
+
     public boolean requestSuccessful() {
         return API_OK.equalsIgnoreCase(this.code);
     }

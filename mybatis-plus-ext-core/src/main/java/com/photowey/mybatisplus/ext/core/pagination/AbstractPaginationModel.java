@@ -101,7 +101,7 @@ public abstract class AbstractPaginationModel implements IPagination, Serializab
     @JsonIgnore
     @ApiModelProperty(hidden = true)
     public Long getTotalCount() {
-        return totalCount;
+        return null != this.totalCount ? this.totalCount : 0L;
     }
 
     public void setTotalCount(Long totalCount) {

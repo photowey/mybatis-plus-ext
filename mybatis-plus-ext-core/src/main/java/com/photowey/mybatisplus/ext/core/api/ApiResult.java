@@ -35,12 +35,15 @@ import java.util.Map;
  * @since 1.1.0
  */
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "单对象响应结果", description = "单对象响应结果")
 public class ApiResult<T> extends ResultSupportAdapter<T, ApiResult<T>> {
 
     private static final long serialVersionUID = 6844539603053310468L;
+
+    public ApiResult() {
+        this(ExceptionStatusEnum.OK.code(), ExceptionStatusEnum.OK.message());
+    }
 
     /**
      * 创建对象
