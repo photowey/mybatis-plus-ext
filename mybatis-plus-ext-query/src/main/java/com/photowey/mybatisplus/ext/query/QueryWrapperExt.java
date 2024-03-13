@@ -17,6 +17,7 @@ package com.photowey.mybatisplus.ext.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.photowey.mybatisplus.ext.annotation.validation.Emptable;
 import com.photowey.mybatisplus.ext.annotation.validation.Nullable;
@@ -409,13 +410,19 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
     // ----------------------------------------------------------------
 
+    /**
+     * LIMIT 1 == wrapper.last("LIMIT 1")
+     *
+     * @return {@link QueryWrapperExt<T>}
+     * @since 1.5.0
+     */
     public QueryWrapperExt<T> limitOne() {
         return this.limit(1);
     }
 
     public QueryWrapperExt<T> limit(int limit) {
         if (limit <= 0) {
-            throw new RuntimeException("错误的分页参数");
+            throw new MybatisPlusException("分页参数错误");
         }
 
         super.last(String.format("LIMIT %d", limit));

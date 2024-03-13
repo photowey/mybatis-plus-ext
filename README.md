@@ -4,7 +4,7 @@
 >
 > > 文档暂未补全,详见示例工程 [mybatis-plus-ext-examples](https://github.com/photowey/mybatis-plus-ext-examples)
 > >
-> > - 示例项目有更新不及时问题
+> > - 目前: 已同步版本 `v1.5.0`
 
 
 
@@ -118,7 +118,7 @@
 
 > `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`
 
-## `v1.3.0`
+## v1.3.0`
 
 > 在版本对字段的填充(`mybatis-plus-ext-meta` 模块)有一个破坏性修改
 >
@@ -165,8 +165,15 @@
 - `Map<String, OperatorHandler> beans = this.beanFactory.getBeansOfType(OperatorHandler.class)`
 - 这样支持: `IOC` 容器中可能存在多个 `OperatorHandler` 实例场景
 
-## `v1.4.0`
+## v1.4.0`
 
 - 新增: `mybatis-plus-ext-service`
 - 新增: `AbstractPayload` 抽象
 - 增强: 分页模型
+
+## `v1.5.0`
+
+1. 重载 `orderByAsc` `orderByDesc`
+    1. 为了能够获取 `LambdaQueryWrapperExt` 和 `QueryWrapperExt`
+2. 新增 `limitOne` 和 `limit` 方法
+    1. 扩展 `.last("${sql}")`
