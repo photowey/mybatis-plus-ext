@@ -26,17 +26,14 @@
         <module>mybatis-plus-ext-service</module>
     </modules>
 
+    <!-- @formatter:off -->
     <scm>
-        <connection>
-            scm:git:git@github.com:photowey/mybatis-plus-ext.git
-        </connection>
-        <developerConnection>
-            scm:git:git@github.com:photowey/mybatis-plus-ext.git
-        </developerConnection>
-        <url>https://github.com/photowey/mybatis-plus-ext
-        </url>
+        <connection> scm:git:git@github.com:photowey/mybatis-plus-ext.git</connection>
+        <developerConnection> scm:git:git@github.com:photowey/mybatis-plus-ext.git</developerConnection>
+        <url>https://github.com/photowey/mybatis-plus-ext</url>
         <tag>HEAD</tag>
     </scm>
+    <!-- @formatter:on -->
 
     <properties>
         <java.version>11</java.version>

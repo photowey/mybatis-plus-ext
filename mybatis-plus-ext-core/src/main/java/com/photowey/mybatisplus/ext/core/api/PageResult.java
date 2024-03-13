@@ -40,7 +40,6 @@ import java.util.function.Function;
  * @since 1.1.0
  */
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "数组对象响应结果", description = "数组对象响应结果")
 public class PageResult<T> extends ResultSupportAdapter<T, PageResult<T>> {
@@ -52,6 +51,10 @@ public class PageResult<T> extends ResultSupportAdapter<T, PageResult<T>> {
      */
     @ApiModelProperty(value = "响应列表数据")
     public ListStruct<T> data;
+
+    public PageResult() {
+        this(ExceptionStatusEnum.OK.code(), ExceptionStatusEnum.OK.message());
+    }
 
     protected PageResult(String code, String message) {
         super(code, message);
@@ -83,13 +86,26 @@ public class PageResult<T> extends ResultSupportAdapter<T, PageResult<T>> {
      * @return {@link PageResult<T>}响应结果
      */
     public static <T> PageResult<T> ofStatic(List<T> data) {
-        PageResult<T> pageResult = PageResult.create();
+        PageResult<T> pageResult = create();
         return pageResult.of(data);
     }
 
     public static <T> PageResult<T> ofStatic(List<T> data, Meta meta) {
-        PageResult<T> pageResult = PageResult.create();
+        PageResult<T> pageResult = create();
         return pageResult.of(data, meta);
+    }
+
+    /**
+     * 构造静态响应结果
+     *
+     * @param data       列表数据
+     * @param meta       分页 Meta 元数据
+     * @param additional 附加参数列表
+     * @return 响应结果
+     */
+    public static <T> PageResult<T> ofStatic(List<T> data, Meta meta, Map<String, Object> additional) {
+        PageResult<T> pageResult = create();
+        return pageResult.of(data, meta, additional);
     }
 
     /**
@@ -100,8 +116,12 @@ public class PageResult<T> extends ResultSupportAdapter<T, PageResult<T>> {
      * @return 响应结果
      */
     public static <T> PageResult<T> ofStatic(List<T> data, Map<String, Object> additional) {
-        PageResult<T> pageResult = PageResult.create();
+        PageResult<T> pageResult = create();
         return pageResult.of(data, additional);
+    }
+
+    public PageResult<T> of(List<T> data, Meta meta, Map<String, Object> additional) {
+        return this.of(ExceptionStatusEnum.OK.code(), ExceptionStatusEnum.OK.message(), data, meta, additional);
     }
 
     /**
@@ -110,7 +130,7 @@ public class PageResult<T> extends ResultSupportAdapter<T, PageResult<T>> {
      * @return {@link PageResult<T>}响应结果
      */
     public static <T> PageResult<T> emptyStatic() {
-        PageResult<T> pageResult = PageResult.create();
+        PageResult<T> pageResult = create();
         return pageResult.of(new ArrayList<>(), Meta.populateDefaultMeta());
     }
 
@@ -456,7 +476,7 @@ public class PageResult<T> extends ResultSupportAdapter<T, PageResult<T>> {
         }
 
         public PageResult<T> build() {
-            PageResult<T> pageResult = PageResult.create();
+            PageResult<T> pageResult = create();
             if (null != this.page) {
                 return pageResult.of(code, message, page, additional);
             }

@@ -17,7 +17,9 @@ package com.photowey.mybatisplus.ext.service;
 
 import com.photowey.mybatisplus.ext.processor.model.query.AbstractQuery;
 
+import java.math.BigDecimal;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * {@code CounterService}
@@ -27,6 +29,24 @@ import java.util.function.Function;
  * @since 1.0.0
  */
 public interface CounterService<T> {
+
+    default Long determineCounter(Supplier<Long> fx) {
+        Long total = fx.get();
+
+        return null == total ? 0L : total;
+    }
+
+    default Integer determineIntegerCounter(Supplier<Integer> fx) {
+        Integer total = fx.get();
+
+        return null == total ? 0 : total;
+    }
+
+    default BigDecimal determineBigDecimalCounter(Supplier<BigDecimal> fx) {
+        BigDecimal total = fx.get();
+
+        return null == total ? BigDecimal.ZERO : total;
+    }
 
     default <Q extends AbstractQuery<T>> Long determineCounter(Q query, Function<Q, Long> fx) {
         Long total = fx.apply(query);

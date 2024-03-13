@@ -17,12 +17,14 @@ package com.photowey.mybatisplus.ext.query;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.enums.SqlLike;
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
 import com.photowey.mybatisplus.ext.annotation.validation.Emptable;
 import com.photowey.mybatisplus.ext.annotation.validation.Nullable;
 import com.photowey.mybatisplus.ext.validator.ValueValidator;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -52,7 +54,6 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
     public <V> QueryWrapperExt<T> eq(String column, @Nullable V value) {
         return (QueryWrapperExt<T>) super.eq(column, value);
     }
-
 
     /**
      * != || <>
@@ -342,6 +343,94 @@ public class QueryWrapperExt<T> extends QueryWrapper<T> {
 
         return this;
     }
+
+    // ----------------------------------------------------------------
+
+    public QueryWrapperExt<T> orderByAsc(String column) {
+        return this.orderByAsc(true, column);
+    }
+
+    public QueryWrapperExt<T> orderByAsc(boolean condition, String column) {
+        super.orderByAsc(condition, column);
+
+        return this;
+    }
+
+    public QueryWrapperExt<T> orderByAsc(List<String> columns) {
+        return this.orderByAsc(true, columns);
+    }
+
+    public QueryWrapperExt<T> orderByAsc(boolean condition, List<String> columns) {
+        super.orderByAsc(condition, columns);
+
+        return this;
+    }
+
+    public QueryWrapperExt<T> orderByAsc(String column, String... columns) {
+        return this.orderByAsc(true, column, columns);
+    }
+
+    public QueryWrapperExt<T> orderByAsc(boolean condition, String column, String... columns) {
+        super.orderByAsc(condition, column, columns);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public QueryWrapperExt<T> orderByDesc(String column) {
+        return this.orderByDesc(true, column);
+    }
+
+    public QueryWrapperExt<T> orderByDesc(boolean condition, String column) {
+        super.orderByDesc(condition, column);
+
+        return this;
+    }
+
+    public QueryWrapperExt<T> orderByDesc(List<String> columns) {
+        return this.orderByDesc(true, columns);
+    }
+
+    public QueryWrapperExt<T> orderByDesc(boolean condition, List<String> columns) {
+        super.orderByDesc(condition, columns);
+
+        return this;
+    }
+
+    public QueryWrapperExt<T> orderByDesc(String column, String... columns) {
+        return this.orderByDesc(true, column, columns);
+    }
+
+    public QueryWrapperExt<T> orderByDesc(boolean condition, String column, String... columns) {
+        super.orderByDesc(condition, column, columns);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    /**
+     * LIMIT 1 == wrapper.last("LIMIT 1")
+     *
+     * @return {@link QueryWrapperExt<T>}
+     * @since 1.5.0
+     */
+    public QueryWrapperExt<T> limitOne() {
+        return this.limit(1);
+    }
+
+    public QueryWrapperExt<T> limit(int limit) {
+        if (limit <= 0) {
+            throw new MybatisPlusException("分页参数错误");
+        }
+
+        super.last(String.format("LIMIT %d", limit));
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
 
     /**
      * 用于获取 {@link QueryWrapper} 自身对象,从而实现一些模板代码,进而提升 {@link QueryWrapper} 的灵活性
