@@ -26,6 +26,7 @@ import com.photowey.mybatisplus.ext.annotation.validation.Nullable;
 import com.photowey.mybatisplus.ext.validator.ValueValidator;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -366,6 +367,84 @@ public class LambdaQueryWrapperExt<T> extends LambdaQueryWrapper<T> {
 
         return this;
     }
+
+    // ----------------------------------------------------------------
+
+    public LambdaQueryWrapperExt<T> orderByAsc(SFunction<T, ?> column) {
+        return this.orderByAsc(true, column);
+    }
+
+    public LambdaQueryWrapperExt<T> orderByAsc(boolean condition, SFunction<T, ?> column) {
+        super.orderByAsc(condition, column);
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> orderByAsc(List<SFunction<T, ?>> columns) {
+        return this.orderByAsc(true, columns);
+    }
+
+    public LambdaQueryWrapperExt<T> orderByAsc(boolean condition, List<SFunction<T, ?>> columns) {
+        super.orderByAsc(condition, columns);
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> orderByAsc(SFunction<T, ?> column, SFunction<T, ?>... columns) {
+        return this.orderByAsc(true, column, columns);
+    }
+
+    public LambdaQueryWrapperExt<T> orderByAsc(boolean condition, SFunction<T, ?> column, SFunction<T, ?>... columns) {
+        super.orderByAsc(condition, column, columns);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public LambdaQueryWrapperExt<T> orderByDesc(SFunction<T, ?> column) {
+        return this.orderByDesc(true, column);
+    }
+
+    public LambdaQueryWrapperExt<T> orderByDesc(boolean condition, SFunction<T, ?> column) {
+        super.orderByDesc(condition, column);
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> orderByDesc(List<SFunction<T, ?>> columns) {
+        return this.orderByDesc(true, columns);
+    }
+
+    public LambdaQueryWrapperExt<T> orderByDesc(boolean condition, List<SFunction<T, ?>> columns) {
+        super.orderByDesc(condition, columns);
+
+        return this;
+    }
+
+    public LambdaQueryWrapperExt<T> orderByDesc(SFunction<T, ?> column, SFunction<T, ?>... columns) {
+        return this.orderByDesc(true, column, columns);
+    }
+
+    public LambdaQueryWrapperExt<T> orderByDesc(boolean condition, SFunction<T, ?> column, SFunction<T, ?>... columns) {
+        super.orderByDesc(condition, column, columns);
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
+
+    public LambdaQueryWrapperExt<T> limitOne() {
+        return this.limit(1);
+    }
+
+    public LambdaQueryWrapperExt<T> limit(int limit) {
+        super.last(String.format("LIMIT %d", limit));
+
+        return this;
+    }
+
+    // ----------------------------------------------------------------
 
     /**
      * 用于获取 {@link LambdaQueryWrapper} 自身对象,从而实现一些模板代码,进而提升 {@link LambdaQueryWrapper} 的灵活性
