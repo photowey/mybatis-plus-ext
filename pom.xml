@@ -5,7 +5,7 @@
 
     <groupId>com.photowey</groupId>
     <artifactId>mybatis-plus-ext</artifactId>
-    <version>1.5.0-SNAPSHOT</version>
+    <version>1.5.0</version>
 
     <packaging>pom</packaging>
     <name>mybatis-plus-ext</name>
@@ -31,7 +31,7 @@
         <connection> scm:git:git@github.com:photowey/mybatis-plus-ext.git</connection>
         <developerConnection> scm:git:git@github.com:photowey/mybatis-plus-ext.git</developerConnection>
         <url>https://github.com/photowey/mybatis-plus-ext</url>
-        <tag>HEAD</tag>
+        <tag>v1.5.0</tag>
     </scm>
     <!-- @formatter:on -->
 
