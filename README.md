@@ -1,5 +1,7 @@
 # `Mybatis-Plus` 扩展项目 `Mybatis-Plus-Ext`
 
+`Ext` 即将迎来全新的 `2.x` 时代
+
 > `Mybatis-Plus` 扩展, 目标是实现更大程度的简化开发
 >
 > > 文档暂未补全,详见示例工程 [mybatis-plus-ext-examples](https://github.com/photowey/mybatis-plus-ext-examples)
@@ -118,7 +120,7 @@
 
 > `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`
 
-## v1.3.0`
+## `v1.3.0`
 
 > 在版本对字段的填充(`mybatis-plus-ext-meta` 模块)有一个破坏性修改
 >
@@ -165,7 +167,7 @@
 - `Map<String, OperatorHandler> beans = this.beanFactory.getBeansOfType(OperatorHandler.class)`
 - 这样支持: `IOC` 容器中可能存在多个 `OperatorHandler` 实例场景
 
-## v1.4.0`
+## `v1.4.0`
 
 - 新增: `mybatis-plus-ext-service`
 - 新增: `AbstractPayload` 抽象
@@ -177,3 +179,24 @@
     1. 为了能够获取 `LambdaQueryWrapperExt` 和 `QueryWrapperExt`
 2. 新增 `limitOne` 和 `limit` 方法
     1. 扩展 `.last("${sql}")`
+
+## `v1.6.0`
+
+为了更好的融入开源生态和项目的推广
+
+- `1.x` 将结束开发生命周期
+  - 不接受新的建议
+  - 不开发新功能
+  - 接受 `Bug` 修复
+- 将迎来全新的 `2.x` 时代
+  - 全新的命名空间
+    - `io.github.photowey`
+  - 尽量采用英文注释和文档
+  - 更简洁的 `API`
+  - 更高效的开发
+  - 拥抱 `Spring Boot3`
+- 启用全新的版本号命名
+  - `3.5.5.x.y`
+    - 其中: `3.5.5` 表示 `mybatis-plus` 的版本号
+    - `x` 表示 `ext` 功能性的开发
+    - `y` 表示 `ext` `Bug` 修改
