@@ -120,7 +120,7 @@
 
 > `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`
 
-## `v1.3.0`
+## v1.3.0`
 
 > 在版本对字段的填充(`mybatis-plus-ext-meta` 模块)有一个破坏性修改
 >
@@ -200,3 +200,11 @@
     - 其中: `3.5.5` 表示 `mybatis-plus` 的版本号
     - `x` 表示 `ext` 功能性的开发
     - `y` 表示 `ext` `Bug` 修改
+
+## `v1.6.1`
+
+> 修改时间处理器-时间转化问题
+
+- `hotfix`
+  - `com.photowey.mybatisplus.ext.processor.time.DefaultTimeProcessor#handleTime`
+  - `com.photowey.mybatisplus.ext.processor.time.DateTimeProcessor#handleTime`
