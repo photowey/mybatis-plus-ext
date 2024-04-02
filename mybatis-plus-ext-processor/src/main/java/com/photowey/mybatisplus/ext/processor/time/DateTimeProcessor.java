@@ -38,8 +38,6 @@ public class DateTimeProcessor implements ITimeProcessor<Date> {
 
     @Override
     public Date handleTime(Long timeStamp, Class<?> clazz) {
-
-        Date date = TimeUtils.toTime(timeStamp, clazz);
-        return date;
+        return TimeUtils.epochMilliToDate(timeStamp);
     }
 }

@@ -29,7 +29,7 @@ import java.util.Date;
  * @date 2022/02/17
  * @since 1.0.0
  */
-@TimeProcessor(dateType = LocalDateTime.class)
+@TimeProcessor
 public class DefaultTimeProcessor implements ITimeProcessor<LocalDateTime> {
 
     @Override
@@ -39,8 +39,6 @@ public class DefaultTimeProcessor implements ITimeProcessor<LocalDateTime> {
 
     @Override
     public LocalDateTime handleTime(Long timeStamp, Class<?> clazz) {
-
-        LocalDateTime date = TimeUtils.toTime(timeStamp, clazz);
-        return date;
+        return TimeUtils.timestampToLocalDateTime(timeStamp);
     }
 }

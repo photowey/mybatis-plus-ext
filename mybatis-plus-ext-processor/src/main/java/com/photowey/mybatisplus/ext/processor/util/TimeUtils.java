@@ -42,7 +42,7 @@ public final class TimeUtils {
         throw new AssertionError("No " + this.getClass().getName() + " instances for you!");
     }
 
-    // ======================================================================
+    // ----------------------------------------------------------------===========================
 
     /**
      * 将时间戳对象 转换为 Date 类型时间
@@ -94,8 +94,16 @@ public final class TimeUtils {
         return (T) new Date(timeStamp);
     }
 
-    // ===========================================
+    // ----------------------------------------------------------------
 
+    public static Date epochMilliToDate(Long timestamp) {
+        if (null == timestamp) {
+            return null;
+        }
+
+        return new Date(timestamp);
+    }
+    
     /**
      * LocalDateTime -> Timestamp(Long)
      *
